@@ -1,0 +1,18 @@
+﻿<div class="card mt-4">
+  <div class="card-body">
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Cargo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td> {{ user.nome }} </td>
+        <td> {{ user.cargo }}
+        <td>
+      </tr>
+    </tbody>
+  </div>
+</div>
