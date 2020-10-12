@@ -13,6 +13,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';;
 import { RegisterComponent } from './register/register.component'
+;
+import { PacienteComponent } from './paciente/paciente.component'
+import { Helper } from './_helpers/helper';
 
 @NgModule({
     imports: [
@@ -26,11 +29,12 @@ import { RegisterComponent } from './register/register.component'
         HomeComponent,
         LoginComponent
 ,
-        RegisterComponent    ],
+        RegisterComponent ,
+        PacienteComponent   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+        Helper,
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]
