@@ -14,8 +14,12 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';;
 import { RegisterComponent } from './register/register.component'
 ;
-import { PacienteComponent } from './paciente/paciente.component'
-import { Helper } from './_helpers/helper';
+import { CadastrarPacienteComponent } from './paciente/cadastrar/paciente.component'
+import { ConsultarPacienteComponent } from './paciente/consultar/paciente.component'
+import { Helper } from './_helpers/helper';;
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
+import { Paciente } from './_models';
 
 @NgModule({
     imports: [
@@ -23,6 +27,8 @@ import { Helper } from './_helpers/helper';
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule
+,
+        NgbModule
     ],
     declarations: [
         AppComponent,
@@ -30,11 +36,16 @@ import { Helper } from './_helpers/helper';
         LoginComponent
 ,
         RegisterComponent ,
-        PacienteComponent   ],
+        CadastrarPacienteComponent,
+        ConsultarPacienteComponent,
+        ModalConsultaPaciente   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         Helper,
+        ModalConsultaPaciente,
+        NgbActiveModal,
+        Paciente,
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]
