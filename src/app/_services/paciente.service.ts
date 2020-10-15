@@ -16,13 +16,23 @@ export class PacienteService {
 
   constructor(private http: HttpClient) { }
   
-  insertPaciente(paciente: any): Observable<Paciente> {
-    
-    return this.http.post<Paciente>(apiUrl, paciente, httpOptions).pipe(
+  getPaciente(id: number): Observable<Paciente> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.get<Paciente>(url).pipe(
+      catchError(this.handleError<Paciente>(`getProduto id=${id}`))
+    );
+  }
 
-      tap((paciente: Paciente) => console.log(`adicionou o paciente com o/ id=${paciente.id}`)),
-      
+  insertPaciente(paciente: any): Observable<Paciente> {
+    return this.http.post<Paciente>(apiUrl, paciente, httpOptions).pipe(
       catchError(this.handleError<Paciente>('insertPaciente'))
+    );
+  }
+
+  updatePaciente(id, paciente): Observable<Paciente> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.put(url, paciente, httpOptions).pipe(
+      catchError(this.handleError<any>('updatePaciente'))
     );
   }
 
