@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '@app/_services';
+import { Helper } from '@app/_helpers/helper';
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -15,9 +16,7 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
     ) { 
-        if (this.authenticationService.currentUserValue) { 
-            this.router.navigate(['/']);
-        }
+        Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
