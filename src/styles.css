@@ -4,3 +4,7 @@
 .criarConta {
     margin-left: 70%;
 }
+
+.sair{
+    cursor: pointer;
+}

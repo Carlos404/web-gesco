@@ -1,9 +1,14 @@
 ﻿<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Início</a>
-        <a class="nav-item nav-link" routerLink="/paciente/consultar">Pacientes</a>
-        <a class="nav-item nav-link" routerLink="/register">Funcionários</a>
-        <a class="nav-item nav-link" (click)="logout()">Sair</a>
+    </div>
+
+    <div class="navbar-nav" *ngFor="let acesso of acessos">
+        <a class="nav-item nav-link" routerLink="{{acesso.routerLink}}">{{acesso.nomeItem}}</a>
+    </div>
+    
+    <div class="navbar-nav">
+        <a class="nav-item nav-link sair" (click)="logout()">Sair</a>
     </div>
 </nav>
 <div class="container">

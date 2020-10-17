@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '@app/_services';
+import { Helper } from '@app/_helpers/helper';
+import { AppComponent } from '@app/app.component';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -17,11 +19,10 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private appComponent: AppComponent
     ) { 
-        if (this.authenticationService.currentUserValue) { 
-            this.router.navigate(['/']);
-        }
+        
     }
 
     ngOnInit() {
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    this.appComponent.colocaAcessosMenu();
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
