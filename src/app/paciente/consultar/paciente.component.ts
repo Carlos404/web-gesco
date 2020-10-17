@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -9,8 +9,12 @@ import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.co
 
 @Component({ selector: 'app-paciente',templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
-  
-  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , cd_paciente: null };
+
+  @ViewChildren('resultadosPaciente') things: QueryList<any>;
+
+  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , registry: null, jsonPaciente: '' };
+  pacientes: Paciente[];
+
   pacienteForm: FormGroup;
   submitted = false;
   jsonPaciente;
@@ -24,27 +28,36 @@ export class ConsultarPacienteComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.consultaTodosPacientes()
     this.pacienteForm = this.criaFormVazio()
   }
 
   onSubmit(pacienteForm: NgForm) {
     this.submitted = true;
-    if (this.isFormInvalido()) return;
-    this.consultaPaciente(pacienteForm['nome']);
+    pacienteForm['nome'] ? this.consultaPaciente(pacienteForm['nome']) : this.consultaTodosPacientes();
+  }
+
+  consultaTodosPacientes() {
+    this.pacienteService.getAllPacientes().toPromise()
+        .then(data =>{
+
+          this.pacientes = data;
+          
+          this.pacientes.forEach(paciente => {
+            this.paciente = paciente;
+            this.paciente.jsonPaciente = JSON.stringify(paciente);
+          });
+        })
   }
 
   consultaPaciente(id) {
-    this.pacienteService
-        .getPaciente(id)
-        .toPromise()
+    this.pacienteService.getPaciente(id).toPromise()
         .then(data =>{
           if(data){
-            this.paciente = data;
-            this.jsonPaciente = JSON.stringify(data);
+            this.pacientes = [];
 
-            if(document.getElementById("resultado").classList.contains("d-none")) document.getElementById("resultado").classList.remove("d-none");
-
-            this.aplicaEventoDeClickConsultarRegistro();
+            this.pacientes.push(data);
+            this.paciente.jsonPaciente = JSON.stringify(data);
           }else{
             document.getElementById("resultado").classList.add("d-none")
             alert("Paciente não encontrado");
@@ -55,12 +68,23 @@ export class ConsultarPacienteComponent implements OnInit {
   aplicaEventoDeClickConsultarRegistro(){
     document.querySelectorAll(".resultado")
             .forEach(resultado =>
-                     resultado.addEventListener("click", () => this.open(this.jsonPaciente))
+                     resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-paciente")))
     );
   }
-  
+
+  ngAfterViewInit() {
+    this.things.changes.subscribe(t => {
+      this.ngForRendred();
+    })
+  }
+
+  ngForRendred(){
+    this.removeDisplayNoneNaTabelaResultados();
+    this.aplicaEventoDeClickConsultarRegistro();
+  }
+
   open(jsonPaciente) {
-    this.modalService.open(ModalConsultaPaciente, { size: 'lg', }).componentInstance.paciente = JSON.parse(jsonPaciente);
+    this.modalService.open(ModalConsultaPaciente, { size: 'lg', }).componentInstance.jsonPaciente = jsonPaciente;
   }
 
   criaFormVazio(){
@@ -71,5 +95,10 @@ export class ConsultarPacienteComponent implements OnInit {
 
   isFormInvalido(){
     return this.pacienteForm.invalid;
+  }
+
+  removeDisplayNoneNaTabelaResultados() {
+    if (document.getElementById("resultado").classList.contains("d-none"))
+      document.getElementById("resultado").classList.remove("d-none");
   }
 }

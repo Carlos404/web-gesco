@@ -1,11 +1,17 @@
 <h2>Cadastro de Paciente</h2>
 <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit(pacienteForm.value)">
     
-    <div class="form-group">
-        <label for="nome">Nome Completo</label>
-        <input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
-        <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
-            <div *ngIf="f.nome.errors.required">O nome é obrigatório</div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="nome">Registro de atendimento</label>
+            <input type="text" formControlName="registry" class="form-control" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="nome">Nome Completo</label>
+            <input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+            <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                <div *ngIf="f.nome.errors.required">O nome é obrigatório</div>
+            </div>
         </div>
     </div>
     <div class="form-row">
@@ -21,15 +27,15 @@
             <label for="dataNascimento">Sexo</label>
             <select formControlName="sexo" name="sexo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sexo.errors }" >
                 <option value="" disabled>Selecione</option> 
-                <option value="1">Masculino</option> 
-                <option value="2">Feminino</option>
+                <option value="masculino">Masculino</option> 
+                <option value="feminino">Feminino</option>
             </select>
             <div *ngIf="submitted && f.sexo.errors" class="invalid-feedback">
                 <div *ngIf="f.sexo.errors.required">Sexo é obrigatório</div>
             </div>
         </div>
     </div>
-    <input type="hidden" formControlName="cd_paciente" name="cd_paciente" />
+    
 
     <div class="form-group">
         <button [disabled]="loading" class="btn btn-primary">Cadastrar</button>

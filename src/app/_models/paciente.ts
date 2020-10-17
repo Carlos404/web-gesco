@@ -1,7 +1,8 @@
 export class Paciente {
     id: number;
-    cd_paciente: number;
+    registry: number;
     nome: string;
     dtNascimento: Date;
     sexo: string;
+    jsonPaciente: string;
   }

@@ -55,7 +55,7 @@ export class CadastrarPacienteComponent implements OnInit {
             nome: [paciente.nome, Validators.required],
             dtNascimento: [paciente.dtNascimento, Validators.required],
             sexo: [this.getSexo(paciente.sexo), Validators.required],
-            cd_paciente: [paciente.cd_paciente],
+            registry: [paciente.registry, Validators.required],
         });
     }
 
@@ -64,12 +64,12 @@ export class CadastrarPacienteComponent implements OnInit {
             nome: ['', Validators.required],
             dtNascimento: ['', Validators.required],
             sexo: ['', Validators.required],
-            cd_paciente: ['3'],
+            registry: ['', Validators.required],
         });
     }
 
     getSexo(sexo: String){
-        return "Masculino" == sexo ? "1" : "2"
+        return "masculino" == sexo.toLowerCase() ? "masculino" : "feminino"
     }
 
     isEdicao(){
