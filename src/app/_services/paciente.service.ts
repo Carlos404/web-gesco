@@ -16,10 +16,16 @@ export class PacienteService {
 
   constructor(private http: HttpClient) { }
   
+  getAllPacientes(): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(apiUrl).pipe(
+      catchError(this.handleError<Paciente[]>(`getAllPacientes`))
+    );
+  }
+
   getPaciente(id: number): Observable<Paciente> {
     const url = `${apiUrl}/${id}`;
     return this.http.get<Paciente>(url).pipe(
-      catchError(this.handleError<Paciente>(`getProduto id=${id}`))
+      catchError(this.handleError<Paciente>(`getPaciente id=${id}`))
     );
   }
 

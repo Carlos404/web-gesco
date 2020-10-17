@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Paciente } from '@app/_models';
@@ -8,14 +7,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './modalConsultaRegistroPaciente.component.html'
   })
   export class ModalConsultaPaciente {
-    paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , cd_paciente: null };
-    jsonPaciente: String;
+    paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , registry: null, jsonPaciente:'' };
+    jsonPaciente: string;
 
     constructor(public activeModal: NgbActiveModal, private router: Router) {
     }
 
-    ngOnInit() {      
-      this.jsonPaciente = JSON.stringify(this.paciente);
+    ngOnInit() {
+      this.paciente = JSON.parse(this.jsonPaciente);
     }
 
     redirecionaTelaEdicao(){
