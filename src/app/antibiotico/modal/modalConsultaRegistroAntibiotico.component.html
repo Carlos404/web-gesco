@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">Consulta de Antibiótico</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label class="font-weight-bold" for="nome">Lote</label>
+        <span class="d-block">{{antibiotico.lote}}</span>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="font-weight-bold" for="nome">Nome</label>
+        <span class="d-block">{{antibiotico.nome}}</span>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label class="font-weight-bold" for="dataNascimento">Validade</label>
+            <span class="d-block">{{antibiotico.validade}}</span>
+        </div>
+        
+        <div class="form-group col-md-3">
+            <label class="font-weight-bold" for="dataNascimento">Dosagem</label>
+            <span class="d-block">{{antibiotico.dosagem}}</span>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label class="font-weight-bold" for="dataNascimento">Aplicação</label>
+          <span class="d-block">{{antibiotico.aplicacao}}</span>
+      </div>
+      <div class="form-group col-md-3">
+        <label class="font-weight-bold" for="dataNascimento">Responsável pelo cadastro</label>
+        <span class="d-block">{{antibiotico.cd_funcionario}}</span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" routerLink="/paciente/cadastrar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+</div>

@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody class="tbody-resultados">
-                            <tr #resultadosPaciente *ngFor="let paciente of pacientes" attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}" class="resultado">
+                            <tr #resultadosPaciente *ngFor="let paciente of pacientes" attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}" class="cursorPointer resultado">
                                 <td>{{paciente.registry}}</td>
                                 <td>{{paciente.nome}}</td>
                                 <td>{{paciente.dtNascimento}}</td>
