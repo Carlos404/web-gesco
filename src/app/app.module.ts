@@ -20,6 +20,11 @@ import { Helper } from './_helpers/helper';;
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { Paciente } from './_models';
+import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
+import { Antibiotico } from './_models/antibiotico';
+import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
+import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibiotico.component';
+;
 
 @NgModule({
     imports: [
@@ -38,14 +43,19 @@ import { Paciente } from './_models';
         RegisterComponent ,
         CadastrarPacienteComponent,
         ConsultarPacienteComponent,
-        ModalConsultaPaciente   ],
+        ModalConsultaPaciente ,
+        CadastrarAntibioticoComponent,
+        ConsultarAntibioticoComponent,
+        ModalConsultaAntibiotico  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         Helper,
         ModalConsultaPaciente,
+        ModalConsultaAntibiotico,
         NgbActiveModal,
         Paciente,
+        Antibiotico,
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]

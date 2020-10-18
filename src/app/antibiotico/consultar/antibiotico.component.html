@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row d-flex justify-content-end mt-5">
+        <button class="btn btn-primary float-right col-1" routerLink="/antibiotico/cadastrar">Cadastrar</button>
+    </div>
+
+    <div class="row">
+        <form [formGroup]="antibioticoForm" (ngSubmit)="onSubmit(antibioticoForm.value)" class="w-100">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h2 class="mt-3">Consultar Antibiótico</h2>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="nome" placeholder="Nome do antibiótico" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button  class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body d-none" id="resultado">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Lote</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Validade</th>
+                                <th scope="col">Dosagem</th>
+                                <th scope="col">Aplicação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody-resultados">
+                            <tr #resultadosAntibiotico *ngFor="let antibiotico of antibioticos" attr.data-codigo-antibiotico="{{antibiotico.id}}" attr.data-json-antibiotico="{{antibiotico.jsonAntibiotico}}" class="cursorPointer resultado">
+                                <td>{{antibiotico.lote}}</td>
+                                <td>{{antibiotico.nome}}</td>
+                                <td>{{antibiotico.validade}}</td>
+                                <td>{{antibiotico.dosagem}}</td>
+                                <td>{{antibiotico.aplicacao}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>              
+        </form>
+    </div>
+</div>
+
