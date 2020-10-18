@@ -3,8 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '@app/_services';
-import { Helper } from '@app/_helpers/helper';
+import { AuthenticationService, UserService } from '@app/_services';
 import { AppComponent } from '@app/app.component';
 
 @Component({ templateUrl: 'login.component.html' })
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService,
+        private userService: UserService,
         private appComponent: AppComponent
     ) { 
         
@@ -44,10 +43,10 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.usuario.value, this.f.senha.value)
+        this.userService.getUser(this.f.usuario.value, this.f.senha.value)
             .pipe(first())
             .subscribe(
-                data => {
+                () => {
                     this.appComponent.colocaAcessosMenu();
                     this.router.navigate([this.returnUrl]);
                 },
