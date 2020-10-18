@@ -10,7 +10,7 @@ import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.co
 @Component({ selector: 'app-paciente',templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
   
-  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , cd_paciente: null };
+  paciente: Paciente;
   pacienteForm: FormGroup;
   submitted = false;
   jsonPaciente;
