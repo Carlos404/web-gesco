@@ -1,15 +1,14 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { controlador } from '@environments/controlador';
+import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient) { }
 
-    getUser(senha: any, usuario: any) {
-        return this.http.get<User[]>(`${controlador.apiUrl}login?pass=${senha}&user=${usuario}`);
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
-
 }
