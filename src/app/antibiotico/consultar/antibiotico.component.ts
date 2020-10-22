@@ -56,10 +56,12 @@ export class ConsultarAntibioticoComponent implements OnInit {
     this.antibioticoService.getAntibiotico(id).toPromise()
         .then(data =>{
           if(data){
-            this.antibioticos = [];
+            this.antibioticos = data;
 
-            data.jsonAntibiotico = JSON.stringify(data);
-            this.antibioticos.push(data);
+            this.antibioticos.forEach(antibiotico => {
+              this.antibiotico = antibiotico;
+              this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
+            });
           }else{
             document.getElementById("resultado").classList.add("d-none")
             alert("Antibiótico não encontrado");

@@ -54,10 +54,12 @@ export class ConsultarPacienteComponent implements OnInit {
     this.pacienteService.getPaciente(id).toPromise()
         .then(data =>{
           if(data){
-            this.pacientes = [];
-
-            this.pacientes.push(data);
-            this.paciente.jsonPaciente = JSON.stringify(data);
+            this.pacientes = data;
+          
+          this.pacientes.forEach(paciente => {
+            this.paciente = paciente;
+            this.paciente.jsonPaciente = JSON.stringify(paciente);
+          });
           }else{
             document.getElementById("resultado").classList.add("d-none")
             alert("Paciente não encontrado");

@@ -22,10 +22,10 @@ O
     );
   }
 
-  getAntibiotico(id: number): Observable<Antibiotico> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Antibiotico>(url).pipe(
-      catchError(this.handleError<Antibiotico>(`getAntibiotico id=${id}`))
+  getAntibiotico(id: number): Observable<Antibiotico[]> {
+    const url = `${apiUrl}/buscar?nome=${id}`;
+    return this.http.get<Antibiotico[]>(url).pipe(
+      catchError(this.handleError<Antibiotico[]>(`getAntibiotico id=${id}`))
     );
   }
 
