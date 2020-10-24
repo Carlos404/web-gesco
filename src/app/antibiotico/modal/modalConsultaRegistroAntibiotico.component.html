@@ -6,37 +6,38 @@
 </div>
 <div class="modal-body">
     <div class="form-row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-5">
         <label class="font-weight-bold" for="nome">Lote</label>
         <span class="d-block">{{antibiotico.lote}}</span>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-5">
         <label class="font-weight-bold" for="nome">Nome</label>
         <span class="d-block">{{antibiotico.nome}}</span>
       </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-5">
             <label class="font-weight-bold" for="dataNascimento">Validade</label>
             <span class="d-block">{{antibiotico.validade}}</span>
         </div>
         
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-5">
             <label class="font-weight-bold" for="dataNascimento">Dosagem</label>
             <span class="d-block">{{antibiotico.dosagem}}</span>
         </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-5">
           <label class="font-weight-bold" for="dataNascimento">Aplicação</label>
           <span class="d-block">{{antibiotico.aplicacao}}</span>
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-5">
         <label class="font-weight-bold" for="dataNascimento">Responsável pelo cadastro</label>
-        <span class="d-block">{{antibiotico.cd_funcionario}}</span>
+        <span class="d-block">{{antibiotico.funcionario}}</span>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" routerLink="/paciente/cadastrar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+  <button type="button" class="btn btn-primary" routerLink="/antibiotico/consultar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click'); open();">Excluir</button>
 </div>

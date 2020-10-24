@@ -28,11 +28,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
         this.submitted = true;
         if (this.isFormInvalido()) return;
 
-        if(this.isEdicao()) {
-            this.updateAntibiotico(antibiotico);
-        }else{
-            this.addAntibiotico(antibiotico);
-        }
+        this.isEdicao() ? this.updateAntibiotico(antibiotico) : this.addAntibiotico(antibiotico)
     }
     updateAntibiotico(antibioticoForm: NgForm) {
         this.antibioticoService.updateAntibiotico(history.state.antibiotico.id, antibioticoForm)
@@ -59,6 +55,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
             validade: [antibiotico.validade, Validators.required],
             dosagem: [antibiotico.dosagem, Validators.required],
             aplicacao: [antibiotico.aplicacao, Validators.required],
+            funcionario: {idFuncionario: antibiotico.idFuncionario}
         });
     }
 
@@ -69,7 +66,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
             validade: ['', Validators.required],
             dosagem: ['', Validators.required],
             aplicacao: ['', Validators.required],
-            cd_funcionario: [this.authenticationService.currentUserValue.id, Validators.required]
+            funcionario: {idFuncionario: this.authenticationService.currentUserValue.id}
         });
     }
 

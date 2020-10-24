@@ -24,6 +24,7 @@ import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibioti
 import { Antibiotico } from './_models/antibiotico';
 import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
 import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibiotico.component';
+import { ModalAviso } from './modals/modal-aviso.component';
 ;
 
 @NgModule({
@@ -46,7 +47,8 @@ import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibioti
         ModalConsultaPaciente ,
         CadastrarAntibioticoComponent,
         ConsultarAntibioticoComponent,
-        ModalConsultaAntibiotico  ],
+        ModalConsultaAntibiotico,
+        ModalAviso  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -56,6 +58,7 @@ import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibioti
         NgbActiveModal,
         Paciente,
         Antibiotico,
+        ModalAviso,
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]

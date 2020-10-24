@@ -22,8 +22,8 @@ O
     );
   }
 
-  getAntibiotico(id: number): Observable<Antibiotico[]> {
-    const url = `${apiUrl}/buscar?nome=${id}`;
+  getAntibiotico(id: string): Observable<Antibiotico[]> {
+    const url = `${apiUrl}/${id}`;
     return this.http.get<Antibiotico[]>(url).pipe(
       catchError(this.handleError<Antibiotico[]>(`getAntibiotico id=${id}`))
     );
@@ -39,6 +39,13 @@ O
     const url = `${apiUrl}/${id}`;
     return this.http.put(url, antibiotico, httpOptions).pipe(
       catchError(this.handleError<any>('updateAntibiotico'))
+    );
+  }
+
+  deleteAntibiotico(id): Observable<Antibiotico> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.delete<Antibiotico>(url, httpOptions).pipe(
+      catchError(this.handleError<Antibiotico>('deleteAntibiotico'))
     );
   }
 

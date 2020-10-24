@@ -22,8 +22,8 @@ export class PacienteService {
     );
   }
 
-  getPaciente(id: number): Observable<Paciente[]> {
-    const url = `${apiUrl}/buscar?nome=${id}`;
+  getPaciente(id: string): Observable<Paciente[]> {
+    const url = `${apiUrl}/${id}`;
     return this.http.get<Paciente[]>(url).pipe(
       catchError(this.handleError<Paciente[]>(`getPaciente id=${id}`))
     );

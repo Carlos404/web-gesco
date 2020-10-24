@@ -5,6 +5,7 @@ export class Antibiotico {
     validade: Date;
     dosagem: string;
     aplicacao: string;
-    cd_funcionario: string;
+    idFuncionario: string;
     jsonAntibiotico: String;
+    funcionario: string;
   }
