@@ -1,11 +1,11 @@
 export class Antibiotico {
     id: number;
-    nome: number;
+    nome: string;
     lote: string;
     validade: Date;
     dosagem: string;
     aplicacao: string;
     idFuncionario: string;
-    jsonAntibiotico: String;
+    jsonAntibiotico: string;
     funcionario: string;
   }

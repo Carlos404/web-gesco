@@ -8,25 +8,25 @@ import { Antibiotico } from '@app/_models/antibiotico';
 
 @Component({ selector: 'app-antibiotico', templateUrl: 'antibiotico.component.html'})
 export class CadastrarAntibioticoComponent implements OnInit {
-  
+
   antibioticoForm: FormGroup;
   loading = false;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-     private router: Router,
-     private antibioticoService: AntibioticoService,
-     private authenticationService: AuthenticationService) {
+              private router: Router,
+              private antibioticoService: AntibioticoService,
+              private authenticationService: AuthenticationService) {
         Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
         this.antibioticoForm = this.isEdicao() ? this.criaFormEdicao(history.state.antibiotico) : this.criaFormVazio();
     }
-    
+
     onSubmit(antibiotico: NgForm) {
         this.submitted = true;
-        if (this.isFormInvalido()) return;
+        if (this.isFormInvalido()) { return; }
 
         this.isEdicao() ? this.updateAntibiotico(antibiotico) : this.addAntibiotico(antibiotico)
     }
@@ -47,7 +47,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
                 console.log(err);
             });
     }
-    
+
     criaFormEdicao(antibiotico: Antibiotico){
         return this.formBuilder.group({
             lote: [antibiotico.lote, Validators.required],
@@ -77,7 +77,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
     isFormInvalido(){
         return this.antibioticoForm.invalid;
     }
-            
+
     get f() { return this.antibioticoForm.controls; }
 
 }

@@ -13,9 +13,9 @@ const apiUrl = 'https://gesco-api.herokuapp.com/antibioticos';
   providedIn: 'root'
 })
 export class AntibioticoService {
-O
+
   constructor(private http: HttpClient) { }
-  
+
   getAllAntibioticos(): Observable<Antibiotico[]> {
     return this.http.get<Antibiotico[]>(apiUrl).pipe(
       catchError(this.handleError<Antibiotico[]>(`getAllAntibioticos`))
@@ -57,5 +57,5 @@ O
       return of(result as T);
     };
   }
-  
+
 }

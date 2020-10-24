@@ -7,7 +7,7 @@ import { Paciente } from '@app/_models';
 
 @Component({ selector: 'app-paciente', templateUrl: 'paciente.component.html'})
 export class CadastrarPacienteComponent implements OnInit {
-  
+
   pacienteForm: FormGroup;
   loading = false;
   submitted = false;
@@ -22,7 +22,6 @@ export class CadastrarPacienteComponent implements OnInit {
     ngOnInit() {
         this.pacienteForm = this.isEdicao() ? this.criaFormEdicao(history.state.paciente) : this.criaFormVazio();
     }
-    
     onSubmit(pacienteForm: NgForm) {
         this.submitted = true;
         if (this.isFormInvalido()) return;
@@ -49,7 +48,7 @@ export class CadastrarPacienteComponent implements OnInit {
                 console.log(err);
             });
     }
-    
+
     criaFormEdicao(paciente: Paciente){
         return this.formBuilder.group({
             nome: [paciente.nome, Validators.required],
@@ -79,7 +78,7 @@ export class CadastrarPacienteComponent implements OnInit {
     isFormInvalido(){
         return this.pacienteForm.invalid;
     }
-            
+
     get f() { return this.pacienteForm.controls; }
 
 }
