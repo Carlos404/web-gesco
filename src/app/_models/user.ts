@@ -5,4 +5,5 @@
     nome?: string;
     cargo?: string;
     token?: string;
+    hospital?: number;
 }

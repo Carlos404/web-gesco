@@ -11,13 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
-import { LoginComponent } from './login';;
-import { RegisterComponent } from './register/register.component'
-;
-import { CadastrarPacienteComponent } from './paciente/cadastrar/paciente.component'
-import { ConsultarPacienteComponent } from './paciente/consultar/paciente.component'
-import { Helper } from './_helpers/helper';;
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { LoginComponent } from './login';
+
+import { CadastrarPacienteComponent } from './paciente/cadastrar/paciente.component';
+import { ConsultarPacienteComponent } from './paciente/consultar/paciente.component';
+import { Helper } from './_helpers/helper';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { Paciente } from './_models';
 import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
@@ -25,7 +24,11 @@ import { Antibiotico } from './_models/antibiotico';
 import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
 import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibiotico.component';
 import { ModalAviso } from './modals/modal-aviso.component';
-;
+import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegistroFuncionario.component';
+import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
+import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
+import { Funcionario } from './_models/funcionario';
+
 
 @NgModule({
     imports: [
@@ -39,15 +42,16 @@ import { ModalAviso } from './modals/modal-aviso.component';
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
-,
-        RegisterComponent ,
+        LoginComponent,
+        CadastrarFuncionarioComponent,
+        ConsultarFuncionarioComponent,
         CadastrarPacienteComponent,
         ConsultarPacienteComponent,
         ModalConsultaPaciente ,
         CadastrarAntibioticoComponent,
         ConsultarAntibioticoComponent,
         ModalConsultaAntibiotico,
+        ModalConsultaFuncionario,
         ModalAviso  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -55,7 +59,9 @@ import { ModalAviso } from './modals/modal-aviso.component';
         Helper,
         ModalConsultaPaciente,
         ModalConsultaAntibiotico,
+        ModalConsultaFuncionario,
         NgbActiveModal,
+        Funcionario,
         Paciente,
         Antibiotico,
         ModalAviso,

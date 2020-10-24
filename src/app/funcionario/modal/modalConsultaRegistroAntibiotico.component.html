@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">Consulta de Funcionário</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="nome">Nome</label>
+        <span class="d-block">{{funcionario.nome}}</span>
+      </div>
+      <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="nome">Data de nascimento</label>
+        <span class="d-block">{{funcionario.dtNascimento}}</span>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label class="font-weight-bold" for="dataNascimento">Sexo</label>
+            <span class="d-block">{{funcionario.sexo}}</span>
+        </div>
+
+        <div class="form-group col-md-5">
+            <label class="font-weight-bold" for="dataNascimento">Tipo de Funcionário</label>
+            <span class="d-block">{{funcionario.tipoFuncionario}}</span>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-5">
+          <label class="font-weight-bold" for="dataNascimento">Nome de usuário</label>
+          <span class="d-block">{{funcionario.nameUser}}</span>
+      </div>
+      <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="dataNascimento">CRM ou CRF</label>
+        <span class="d-block">{{funcionario.crmOuCrf}}</span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+</div>
