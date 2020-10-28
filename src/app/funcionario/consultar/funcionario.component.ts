@@ -7,6 +7,7 @@ import { Helper } from '@app/_helpers/helper';
 import { FuncionarioService } from '@app/_services/Funcionario.service';
 import { Funcionario } from '@app/_models/Funcionario';
 import { ModalConsultaFuncionario } from '../modal/modalConsultaRegistroFuncionario.component';
+import { Cargo } from '@app/enum/cargo';
 
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
 export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
@@ -44,12 +45,7 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
     this.funcionarioService.getAllFuncionarios().toPromise()
         .then(data => {
           if (data){
-            this.funcionarios = data;
-
-            this.funcionarios.forEach(funcionario => {
-              this.funcionario = funcionario;
-              this.funcionario.jsonFuncionario = JSON.stringify(funcionario);
-            });
+            this.manipulaRetorno(data);
           }
         });
   }
@@ -58,17 +54,33 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
     this.funcionarioService.getFuncionario(id).toPromise()
         .then(data => {
           if (data){
-            this.funcionarios = data;
-
-            this.funcionarios.forEach(funcionario => {
-              this.funcionario = funcionario;
-              this.funcionario.jsonFuncionario = JSON.stringify(funcionario);
-            });
+            this.manipulaRetorno(data);
           }else{
             document.getElementById('resultado').classList.add('d-none');
-            alert('Antibiótico não encontrado');
+            alert('Funcionário não encontrado');
           }
         });
+  }
+  private manipulaRetorno(data: Funcionario[]) {
+    this.funcionarios = data;
+
+    this.funcionarios = this.funcionarios.filter(funcionario => this.removeDesenvolvedoresDaLista(funcionario));
+    this.funcionarios.forEach(funcionario => {
+      this.funcionario = funcionario;
+      this.funcionario.jsonFuncionario = JSON.stringify(funcionario);
+    });
+  }
+
+  removeDesenvolvedoresDaLista(funcionario: Funcionario){
+    const cargoDesenvolvedor = Cargo.cargos.DESENVOLEDOR.id;
+
+    if (this.authenticationService.currentUserValue.tipoUser === cargoDesenvolvedor) {
+      return true;
+    }
+    if (funcionario.tipoFuncionario.toString() !== cargoDesenvolvedor.toString()){
+      return true;
+    }
+
   }
 
   ngAfterViewInit() {

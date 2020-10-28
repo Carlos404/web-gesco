@@ -39,6 +39,7 @@
 
           <select formControlName="tipoFuncionario" name="tipoFuncionario" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tipoFuncionario.errors }" >
               <option value="" disabled>Selecione</option>
+              <option *ngIf="acessoDev" value="0">Desenvolvedor</option>
               <option value="1">Médico</option>
               <option value="2">Farmacêutico</option>
               <option value="3">Internação</option>

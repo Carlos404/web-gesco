@@ -25,6 +25,7 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
 import { Funcionario } from './_models/funcionario';
+import { GetCargoPipe } from './_helpers/util.pipes';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { Funcionario } from './_models/funcionario';
         ConsultarAntibioticoComponent,
         ModalConsultaAntibiotico,
         ModalConsultaFuncionario,
+        GetCargoPipe,
         ModalAviso  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

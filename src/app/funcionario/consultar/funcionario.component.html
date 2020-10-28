@@ -28,7 +28,7 @@
                         <tbody class="tbody-resultados">
                             <tr #resultadosFuncionario *ngFor="let funcionario of funcionarios" attr.data-codigo-funcionario="{{funcionario.idFuncionario}}" attr.data-json-funcionario="{{funcionario.jsonFuncionario}}" class="cursorPointer resultado">
                                 <td>{{funcionario.nome}}</td>
-                                <td>{{funcionario.tipoFuncionario}}</td>
+                                <td>{{funcionario.tipoFuncionario | getNomeCargoPeloId}}</td>
                                 <td>{{funcionario.dtNascimento}}</td>
                                 <td>{{funcionario.nameUser}}</td>
                             </tr>

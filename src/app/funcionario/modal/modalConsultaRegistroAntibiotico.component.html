@@ -23,7 +23,7 @@
 
         <div class="form-group col-md-5">
             <label class="font-weight-bold" for="dataNascimento">Tipo de Funcionário</label>
-            <span class="d-block">{{funcionario.tipoFuncionario}}</span>
+            <span class="d-block">{{funcionario.tipoFuncionario | getNomeCargoPeloId}}</span>
         </div>
     </div>
     <div class="form-row">

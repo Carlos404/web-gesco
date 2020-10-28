@@ -9,9 +9,11 @@ import { FuncionarioService } from '@app/_services/Funcionario.service';
 
 @Component({templateUrl: 'funcionario.component.html'})
 export class CadastrarFuncionarioComponent implements OnInit {
+
     funcionarioForm: FormGroup;
     loading = false;
     submitted = false;
+    acessoDev = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -23,6 +25,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.acessoDev = this.authenticationService.currentUserValue.tipoUser === 0;
       this.funcionarioForm = this.isEdicao() ? this.criaFormEdicao(history.state.funcionario) : this.criaFormVazio();
     }
     get f() { return this.funcionarioForm.controls; }
