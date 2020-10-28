@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private appComponent: AppComponent
-    ) { 
-        
+    ) {
+
     }
 
     ngOnInit() {
@@ -52,8 +52,18 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.error = error;
-                    this.loading = false;
+                  switch(error.status){
+                    case 404:
+                      this.error = 'Usuário não encontrado';
+                      break;
+                    case 401:
+                      this.error = 'Usuário ou senha incorretos';
+                      break;
+                    default:
+                      this.error = 'Falha no login, contate o administrador';
+                  }
+                  this.loading = false;
+
                 });
     }
 }

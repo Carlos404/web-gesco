@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
+const apiUrl = 'https://gesco-api.herokuapp.com/login';
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
@@ -21,9 +23,8 @@ export class AuthenticationService {
     }
 
     login(usuario: string, senha: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { usuario, senha })
+        return this.http.get<any>(`${apiUrl}?pass=${senha}&user=${usuario}`)
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
@@ -31,7 +32,6 @@ export class AuthenticationService {
     }
 
     logout() {
-        // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
