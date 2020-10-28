@@ -29,14 +29,13 @@ export class CadastrarFuncionarioComponent implements OnInit {
 
     onSubmit(funcionarioForm: NgForm) {
         this.submitted = true;
-        if (funcionarioForm.invalid) {
+        if (this.funcionarioForm.invalid) {
             return;
         }
         this.isEdicao() ? this.updateFuncionario(funcionarioForm) : this.addFuncionario(funcionarioForm);
     }
 
     updateFuncionario(funcionarioForm: NgForm) {
-      console.log(funcionarioForm)
       this.funcionarioService.updateFuncionario(history.state.funcionario.idFuncionario, funcionarioForm)
           .subscribe(res => {
               this.router.navigate(['funcionario/consultar']);
@@ -46,7 +45,6 @@ export class CadastrarFuncionarioComponent implements OnInit {
     }
 
     addFuncionario(funcionarioForm: NgForm) {
-      console.log(funcionarioForm)
       this.funcionarioService.insertFuncionario(funcionarioForm)
           .subscribe(res => {
               this.router.navigate(['funcionario/consultar']);
@@ -64,7 +62,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
           nameUser: [funcionario.nameUser, Validators.required],
           senha: [funcionario.senha, Validators.required],
           crmOuCrf: [funcionario.crmOuCrf, Validators.required],
-          hospital: {id: this.authenticationService.currentUserValue.hospital}
+          hospital: [{id: this.authenticationService.currentUserValue.hospital}, Validators.required]
       });
     }
 
@@ -77,7 +75,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
         nameUser: ['', Validators.required],
         senha: ['', Validators.required],
         crmOuCrf: ['', Validators.required],
-        hospital: {id: this.authenticationService.currentUserValue.hospital}
+        hospital: [{id: this.authenticationService.currentUserValue.hospital}, Validators.required]
       });
   }
     isEdicao(){

@@ -43,7 +43,6 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
 
     this.funcionarioService.getAllFuncionarios().toPromise()
         .then(data => {
-          console.log(data)
           if (data){
             this.funcionarios = data;
 
