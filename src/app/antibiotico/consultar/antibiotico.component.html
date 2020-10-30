@@ -30,7 +30,7 @@
                             <tr #resultadosAntibiotico *ngFor="let antibiotico of antibioticos" attr.data-codigo-antibiotico="{{antibiotico.id}}" attr.data-json-antibiotico="{{antibiotico.jsonAntibiotico}}" class="cursorPointer resultado">
                                 <td>{{antibiotico.lote}}</td>
                                 <td>{{antibiotico.nome}}</td>
-                                <td>{{antibiotico.validade}}</td>
+                                <td>{{antibiotico.validade | date: 'dd/MM/yyyy'}}</td>
                                 <td>{{antibiotico.dosagem}}</td>
                                 <td>{{antibiotico.aplicacao}}</td>
                             </tr>
