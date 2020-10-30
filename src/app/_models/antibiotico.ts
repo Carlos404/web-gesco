@@ -3,7 +3,7 @@ export class Antibiotico {
     nome: string;
     lote: string;
     validade: Date;
-    dosagem: string;
+    dosagem: number;
     aplicacao: string;
     idFuncionario: string;
     jsonAntibiotico: string;

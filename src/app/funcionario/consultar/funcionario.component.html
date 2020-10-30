@@ -29,7 +29,7 @@
                             <tr #resultadosFuncionario *ngFor="let funcionario of funcionarios" attr.data-codigo-funcionario="{{funcionario.idFuncionario}}" attr.data-json-funcionario="{{funcionario.jsonFuncionario}}" class="cursorPointer resultado">
                                 <td>{{funcionario.nome}}</td>
                                 <td>{{funcionario.tipoFuncionario | getNomeCargoPeloId}}</td>
-                                <td>{{funcionario.dtNascimento}}</td>
+                                <td>{{funcionario.dtNascimento | date: 'dd/MM/yyyy' }}</td>
                                 <td>{{funcionario.nameUser}}</td>
                             </tr>
                         </tbody>
