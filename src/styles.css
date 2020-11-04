@@ -8,3 +8,21 @@
 .cursorPointer{
     cursor: pointer;
 }
+
+.loginHeader {
+    background-color: #3498db;
+    min-height: 300px;
+    min-width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.logo {
+    margin-left: 12%;
+    margin-top: 2%;
+}
+
+.body {
+    background-color: #5eb8df !important;
+    color: #5eb8df !important;
+}

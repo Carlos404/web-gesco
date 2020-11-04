@@ -11,6 +11,9 @@ import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiot
 @Component({ selector: 'app-antibiotico',templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
 
+  order: string = 'antibiotico.nome';
+  reverse: boolean = false;
+
   @ViewChildren('resultadosAntibiotico') things: QueryList<any>;
 
   antibioticos: Antibiotico[];
@@ -19,7 +22,8 @@ export class ConsultarAntibioticoComponent implements OnInit {
   antibioticoForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private antibioticoService: AntibioticoService,
     private authenticationService: AuthenticationService,
@@ -67,6 +71,14 @@ export class ConsultarAntibioticoComponent implements OnInit {
             alert("Antibiótico não encontrado");
           }
         });
+  }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
   }
 
   ngAfterViewInit() {

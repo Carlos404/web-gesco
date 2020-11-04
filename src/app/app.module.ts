@@ -26,6 +26,7 @@ import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionar
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
 import { Funcionario } from './_models/funcionario';
 import { GetCargoPipe } from './_helpers/util.pipes';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { GetCargoPipe } from './_helpers/util.pipes';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        OrderModule
 ,
         NgbModule
     ],

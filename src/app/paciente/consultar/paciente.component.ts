@@ -7,12 +7,15 @@ import { Helper } from '@app/_helpers/helper';
 import { Paciente } from '@app/_models';
 import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.component';
 
-@Component({ selector: 'app-paciente',templateUrl: './paciente.component.html' })
+@Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
+
+  order: string = 'paciente.registry';
+  reverse: boolean = false;
 
   @ViewChildren('resultadosPaciente') things: QueryList<any>;
 
-  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null , registry: null, jsonPaciente: '' };
+  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null, registry: null, jsonPaciente: '' };
   pacientes: Paciente[];
 
   pacienteForm: FormGroup;
@@ -24,8 +27,8 @@ export class ConsultarPacienteComponent implements OnInit {
     private pacienteService: PacienteService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
-       Helper.validaSessaoUsuario(this.authenticationService, this.router);
-   }
+    Helper.validaSessaoUsuario(this.authenticationService, this.router);
+  }
 
   ngOnInit(): void {
     this.consultaTodosPacientes()
@@ -39,39 +42,47 @@ export class ConsultarPacienteComponent implements OnInit {
 
   consultaTodosPacientes() {
     this.pacienteService.getAllPacientes().toPromise()
-        .then(data =>{
+      .then(data => {
 
-          this.pacientes = data;
-          
-          this.pacientes.forEach(paciente => {
-            this.paciente = paciente;
-            this.paciente.jsonPaciente = JSON.stringify(paciente);
-          });
-        })
+        this.pacientes = data;
+
+        this.pacientes.forEach(paciente => {
+          this.paciente = paciente;
+          this.paciente.jsonPaciente = JSON.stringify(paciente);
+        });
+      })
   }
 
   consultaPaciente(id) {
     this.pacienteService.getPaciente(id).toPromise()
-        .then(data =>{
-          if(data){
-            this.pacientes = data;
-          
+      .then(data => {
+        if (data) {
+          this.pacientes = data;
+
           this.pacientes.forEach(paciente => {
             this.paciente = paciente;
             this.paciente.jsonPaciente = JSON.stringify(paciente);
           });
-          }else{
-            document.getElementById("resultado").classList.add("d-none")
-            alert("Paciente não encontrado");
-          }
-        });
+        } else {
+          document.getElementById("resultado").classList.add("d-none")
+          alert("Paciente não encontrado");
+        }
+      });
   }
 
-  aplicaEventoDeClickConsultarRegistro(){
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
+  }
+
+  aplicaEventoDeClickConsultarRegistro() {
     document.querySelectorAll(".resultado")
-            .forEach(resultado =>
-                     resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-paciente")))
-    );
+      .forEach(resultado =>
+        resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-paciente")))
+      );
   }
 
   ngAfterViewInit() {
@@ -80,7 +91,7 @@ export class ConsultarPacienteComponent implements OnInit {
     })
   }
 
-  ngForRendred(){
+  ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
     this.aplicaEventoDeClickConsultarRegistro();
   }
@@ -89,13 +100,13 @@ export class ConsultarPacienteComponent implements OnInit {
     this.modalService.open(ModalConsultaPaciente, { size: 'lg', }).componentInstance.jsonPaciente = jsonPaciente;
   }
 
-  criaFormVazio(){
+  criaFormVazio() {
     return this.formBuilder.group({
-        nome: ['', Validators.required],
+      nome: ['', Validators.required],
     });
   }
 
-  isFormInvalido(){
+  isFormInvalido() {
     return this.pacienteForm.invalid;
   }
 

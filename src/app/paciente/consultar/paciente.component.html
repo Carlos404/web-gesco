@@ -1,41 +1,54 @@
 <div class="container">
-    <div class="row d-flex justify-content-end mt-5">
-        <button class="btn btn-primary float-right col-1" routerLink="/paciente/cadastrar">Cadastrar</button>
-    </div>
+  <div class="row d-flex justify-content-end mt-5">
+    <button class="btn btn-primary float-right col-1" routerLink="/paciente/cadastrar">Cadastrar</button>
+  </div>
 
-    <div class="row">
-        <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit(pacienteForm.value)" class="w-100">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h2 class="mt-3">Consultar Paciente</h2>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" formControlName="nome" placeholder="Nome do paciente" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button  class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body d-none" id="resultado">
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Registro de Atendimento</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Data de Nascimento</th>
-                                <th scope="col">Sexo</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody-resultados">
-                            <tr #resultadosPaciente *ngFor="let paciente of pacientes" attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}" class="cursorPointer resultado">
-                                <td>{{paciente.registry}}</td>
-                                <td>{{paciente.nome}}</td>
-                                <td>{{paciente.dtNascimento | date: 'dd/MM/yyyy'}}</td>
-                                <td>{{paciente.sexo}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>              
-        </form>
-    </div>
+  <div class="row">
+    <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit(pacienteForm.value)" class="w-100">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2 class="mt-3">Consultar Paciente</h2>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="nome" placeholder="Nome do paciente"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body d-none" id="resultado">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th [class.active]="order === 'registry'" (click)="setOrder('registry')" scope="col">Registro
+                  Atendimento
+                  <span [hidden]="reverse">▼</span>
+                  <span [hidden]="!reverse">▲</span></th>
+                <th [class.active]="order === 'nome'" (click)="setOrder('nome')" scope="col">Nome
+                  <span [hidden]="reverse">▼</span>
+                  <span [hidden]="!reverse">▲</span></th>
+                <th [class.active]="order === 'dtNascimento'" (click)="setOrder('dtNascimento')" scope="col">Data
+                  Nascimento
+                  <span [hidden]="reverse">▼</span>
+                  <span [hidden]="!reverse">▲</span></th>
+                <th [class.active]="order === 'sexo'" (click)="setOrder('sexo')" scope="col">Sexo
+                  <span [hidden]="reverse">▼</span>
+                  <span [hidden]="!reverse">▲</span></th>
+              </tr>
+            </thead>
+            <tbody class="tbody-resultados">
+              <tr #resultadosPaciente *ngFor="let paciente of pacientes | orderBy: order:reverse"
+                attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}"
+                class="cursorPointer resultado">
+                <td>{{paciente.registry}}</td>
+                <td>{{paciente.nome}}</td>
+                <td>{{paciente.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{paciente.sexo}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
