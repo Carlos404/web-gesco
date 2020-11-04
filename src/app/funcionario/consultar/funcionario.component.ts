@@ -12,6 +12,9 @@ import { Cargo } from '@app/enum/cargo';
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
 export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
 
+  order: string = 'funcionario.nome';
+  reverse: boolean = false;
+
   @ViewChildren('resultadosFuncionario') things: QueryList<any>;
 
   KEY_NOME = 'nome';
@@ -61,6 +64,15 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
           }
         });
   }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
+  }
+
   private manipulaRetorno(data: Funcionario[]) {
     this.funcionarios = data;
 
