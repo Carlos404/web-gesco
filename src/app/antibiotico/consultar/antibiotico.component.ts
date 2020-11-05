@@ -32,8 +32,8 @@ export class ConsultarAntibioticoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.consultaTodosAntibioticos()
-    this.antibioticoForm = this.criaFormVazio()
+    this.consultaTodosAntibioticos();
+    this.antibioticoForm = this.criaFormVazio();
   }
 
   onSubmit(antibioticoForm: NgForm) {
@@ -42,7 +42,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
   }
 
   consultaTodosAntibioticos() {
-    
     this.antibioticoService.getAllAntibioticos().toPromise()
         .then(data =>{
           if(data){
