@@ -25,9 +25,11 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
 import { Funcionario } from './_models/funcionario';
-import { GetCargoPipe } from './_helpers/util.pipes';
+import { GetCargoPipe, GetStatusTratamentoPipe } from './_helpers/util.pipes';
 import { OrderModule } from 'ngx-order-pipe';
-
+import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
+import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
+import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
 
 @NgModule({
     imports: [
@@ -47,12 +49,16 @@ import { OrderModule } from 'ngx-order-pipe';
         ConsultarFuncionarioComponent,
         CadastrarPacienteComponent,
         ConsultarPacienteComponent,
+        CadastrarTratamentoComponent,
+        ConsultarTratamentoComponent,
         ModalConsultaPaciente ,
         CadastrarAntibioticoComponent,
         ConsultarAntibioticoComponent,
         ModalConsultaAntibiotico,
         ModalConsultaFuncionario,
+        ModalConsultaTratamento,
         GetCargoPipe,
+        GetStatusTratamentoPipe,
         ModalAviso  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -61,6 +67,7 @@ import { OrderModule } from 'ngx-order-pipe';
         ModalConsultaPaciente,
         ModalConsultaAntibiotico,
         ModalConsultaFuncionario,
+        ModalConsultaTratamento,
         NgbActiveModal,
         Funcionario,
         Paciente,

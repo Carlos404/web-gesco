@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Iniciar Tratamento</h2>
+  <form [formGroup]="tratamentoForm" (ngSubmit)="onSubmit(tratamentoForm.value)">
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+          <label for="nome">Paciente</label>
+          <div class="input-group-prepend">
+            <button class="btn btn-primary" type="button" (click)="openPaciente()" >Procurar</button>
+            <input type="text" formControlName="paciente"  id="nomePaciente" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.paciente.errors }" />
+            <div *ngIf="submitted && f.paciente.errors" class="invalid-feedback">
+                <div *ngIf="f.paciente.errors.required">O paciente é obrigatório</div>
+            </div>
+          </div>
+        </div>
+      <div class="col-md-3 mb-3">
+          <label for="nome">Diagnóstico</label>
+          <input type="text" formControlName="diagnostico" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.diagnostico.errors }" />
+          <div *ngIf="submitted && f.diagnostico.errors" class="invalid-feedback">
+              <div *ngIf="f.diagnostico.errors.required">O diagnóstico é obrigatório</div>
+          </div>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="dataNascimento">Data Inicio do tratamento</label>
+            <input type="date" formControlName="inicio_tratamento" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.inicio_tratamento.errors }" />
+            <div *ngIf="submitted && f.inicio_tratamento.errors" class="invalid-feedback">
+                <div *ngIf="f.inicio_tratamento.errors.required">Data de inicio é obrigatória</div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="dataNascimento">Data fim do tratamento</label>
+          <input type="date" formControlName="fim_tratamento" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fim_tratamento.errors }" />
+          <div *ngIf="submitted && f.fim_tratamento.errors" class="invalid-feedback">
+              <div *ngIf="f.fim_tratamento.errors.required">Data fim é obrigatória</div>
+          </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="dataNascimento">Antibióticos</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="dataNascimento">Observações</label>
+          <input type="text" formControlName="obs" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.obs.errors }" />
+          <div *ngIf="submitted && f.obs.errors" class="invalid-feedback">
+              <div *ngIf="f.obs.errors.required">Observação é obrigatória</div>
+          </div>
+      </div>
+    </div>
+
+      <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">Cadastrar</button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <a routerLink="/tratamento/consultar" class="btn btn-link">Cancelar</a>
+      </div>
+  </form>
+</div>

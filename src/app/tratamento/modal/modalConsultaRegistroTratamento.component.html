@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title">Consulta de tratamento</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label class="font-weight-bold" for="nome">Paciente</label>
+      <span class="d-block">{{tratamento.paciente}}</span>
+    </div>
+    <div class="form-group col-md-5">
+      <label class="font-weight-bold" for="nome">Diagnóstico</label>
+      <span class="d-block">{{tratamento.diagnostico}}</span>
+    </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-5">
+          <label class="font-weight-bold" for="dataNascimento">Data de inicio</label>
+          <span class="d-block">{{tratamento.inicio_tratamento}}</span>
+      </div>
+
+      <div class="form-group col-md-5">
+          <label class="font-weight-bold" for="dataNascimento">Data fim</label>
+          <span class="d-block">{{tratamento.fim_tratamento}}</span>
+      </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="dataNascimento">Status do tratamento</label>
+        <span class="d-block">{{tratamento.statusTratamento | getStatusTratamentoPeloCodigo}}</span>
+    </div>
+
+    <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="dataNascimento">Médico</label>
+        <span class="d-block">{{tratamento.medico}}</span>
+    </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-5">
+      <label class="font-weight-bold" for="dataNascimento">Observações</label>
+      <span class="d-block">{{tratamento.obs}}</span>
+  </div>
+
+  <div class="form-group col-md-5">
+      <label class="font-weight-bold" for="dataNascimento">Antibióticos</label>
+      <span class="d-block" *ngFor="let antibiotico of tratamento.antibioticos">{{antibiotico}}</span>
+  </div>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+</div>
