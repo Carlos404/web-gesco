@@ -20,24 +20,22 @@
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th [class.active]="order === 'registry'" (click)="setOrder('registry')" scope="col">Registro
-                  Atendimento
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'nome'" (click)="setOrder('nome')" scope="col">Nome
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'dtNascimento'" (click)="setOrder('dtNascimento')" scope="col">Data
-                  Nascimento
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'sexo'" (click)="setOrder('sexo')" scope="col">Sexo
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
+                <th (click)="setOrder('registry')" scope="col">Registro Atendimento
+                  <span *ngIf="order =='registry'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('nome')" scope="col">Nome
+                  <span *ngIf="order =='nome'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('dtNascimento')" scope="col">Data Nascimento
+                  <span *ngIf="order =='dtNascimento'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('sexo')" scope="col">Sexo
+                  <span *ngIf="order =='sexo'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
               </tr>
             </thead>
             <tbody class="tbody-resultados">
-              <tr #resultadosPaciente *ngFor="let paciente of pacientes | orderBy: order:reverse"
+              <tr #resultadosPaciente *ngFor="let paciente of pacientes | orderBy: order: reverse;  let i = index"
                 attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}"
                 class="cursorPointer resultado">
                 <td>{{paciente.registry}}</td>

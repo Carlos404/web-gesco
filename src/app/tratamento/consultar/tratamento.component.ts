@@ -11,7 +11,7 @@ import { TratamentoService } from './../../_services/tratamento.service';
 @Component({ selector: 'app-consulta-tratamento', templateUrl: 'tratamento.component.html' })
 export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
-  order: string = 'tratamento.paciente';
+  order: string = 'paciente';
   reverse: boolean = false;
 
   @ViewChildren('resultadosTratamento') things: QueryList<any>;
@@ -106,11 +106,11 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  setOrder(value: string) {
-    if (this.order === value) {
+  setOrder(order) {
+    if (this.order === order) {
       this.reverse = !this.reverse;
     }
 
-    this.order = value;
+    this.order = order;
   }
 }

@@ -10,7 +10,7 @@ import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.co
 @Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
 
-  order: string = 'paciente.registry';
+  order: string = 'registry';
   reverse: boolean = false;
 
   @ViewChildren('resultadosPaciente') things: QueryList<any>;
@@ -70,12 +70,12 @@ export class ConsultarPacienteComponent implements OnInit {
       });
   }
 
-  setOrder(value: string) {
-    if (this.order === value) {
+  setOrder(order) {
+    if (this.order === order) {
       this.reverse = !this.reverse;
     }
 
-    this.order = value;
+    this.order = order;
   }
 
   aplicaEventoDeClickConsultarRegistro() {

@@ -12,7 +12,7 @@ import { Cargo } from '@app/enum/cargo';
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
 export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
 
-  order: string = 'funcionario.nome';
+  order: string = 'nome';
   reverse: boolean = false;
 
   @ViewChildren('resultadosFuncionario') things: QueryList<any>;
@@ -65,12 +65,12 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
         });
   }
 
-  setOrder(value: string) {
-    if (this.order === value) {
+  setOrder(order) {
+    if (this.order === order) {
       this.reverse = !this.reverse;
     }
 
-    this.order = value;
+    this.order = order;
   }
 
   private manipulaRetorno(data: Funcionario[]) {
