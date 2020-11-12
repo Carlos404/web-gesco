@@ -8,11 +8,12 @@ import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
 import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
 
-@Component({ selector: 'app-antibiotico',templateUrl: './antibiotico.component.html' })
+@Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
 
-  order: string = 'antibiotico.nome';
+  order: string = 'lote';
   reverse: boolean = false;
+  verify: boolean = false;
 
   @ViewChildren('resultadosAntibiotico') things: QueryList<any>;
 
@@ -28,8 +29,8 @@ export class ConsultarAntibioticoComponent implements OnInit {
     private antibioticoService: AntibioticoService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
-       Helper.validaSessaoUsuario(this.authenticationService, this.router);
-   }
+    Helper.validaSessaoUsuario(this.authenticationService, this.router);
+  }
 
   ngOnInit(): void {
     this.consultaTodosAntibioticos();
@@ -43,41 +44,41 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
   consultaTodosAntibioticos() {
     this.antibioticoService.getAllAntibioticos().toPromise()
-        .then(data =>{
-          if(data){
-            this.antibioticos = data;
-            
-            this.antibioticos.forEach(antibiotico => {
-              this.antibiotico = antibiotico;
-              this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
-            });
-          }
-        })
+      .then(data => {
+        if (data) {
+          this.antibioticos = data;
+
+          this.antibioticos.forEach(antibiotico => {
+            this.antibiotico = antibiotico;
+            this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
+          });
+        }
+      })
   }
 
   consultaAntibiotico(id) {
     this.antibioticoService.getAntibiotico(id).toPromise()
-        .then(data =>{
-          if(data){
-            this.antibioticos = data;
+      .then(data => {
+        if (data) {
+          this.antibioticos = data;
 
-            this.antibioticos.forEach(antibiotico => {
-              this.antibiotico = antibiotico;
-              this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
-            });
-          }else{
-            document.getElementById("resultado").classList.add("d-none")
-            alert("Antibiótico não encontrado");
-          }
-        });
+          this.antibioticos.forEach(antibiotico => {
+            this.antibiotico = antibiotico;
+            this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
+          });
+        } else {
+          document.getElementById("resultado").classList.add("d-none")
+          alert("Antibiótico não encontrado");
+        }
+      });
   }
 
-  setOrder(value: string) {
-    if (this.order === value) {
+  setOrder(order) {
+    if (this.order === order) {
       this.reverse = !this.reverse;
     }
 
-    this.order = value;
+    this.order = order;
   }
 
   ngAfterViewInit() {
@@ -86,16 +87,19 @@ export class ConsultarAntibioticoComponent implements OnInit {
     })
   }
 
-  ngForRendred(){
+  ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.aplicaEventoDeClickConsultarRegistro();
+    if(this.verify === false) {
+      this.aplicaEventoDeClickConsultarRegistro();
+    }
   }
 
-  aplicaEventoDeClickConsultarRegistro(){
+  aplicaEventoDeClickConsultarRegistro() {
+    this.verify = true;
     document.querySelectorAll(".resultado")
-            .forEach(resultado =>
-                     resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-antibiotico")))
-    );
+      .forEach(resultado =>
+        resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-antibiotico")))
+      );
   }
 
   open(jsonAntibiotico) {
@@ -107,9 +111,9 @@ export class ConsultarAntibioticoComponent implements OnInit {
       document.getElementById("resultado").classList.remove("d-none");
   }
 
-  criaFormVazio(){
+  criaFormVazio() {
     return this.formBuilder.group({
-        nome: ['', Validators.required],
+      nome: ['', Validators.required],
     });
   }
 }

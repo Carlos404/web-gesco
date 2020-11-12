@@ -20,25 +20,26 @@
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th [class.active]="order === 'lote'" (click)="setOrder('lote')" scope="col">Lote
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'nome'" (click)="setOrder('nome')" scope="col">Nome
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'validade'" (click)="setOrder('validade')" scope="col">Validade
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'dosagem'" (click)="setOrder('dosagem')" scope="col">Dosagem
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'aplicacao'" (click)="setOrder('aplicacao')" scope="col">Aplicação
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
+                <th (click)="setOrder('lote')" scope="col">Lote
+                  <span *ngIf="order =='lote'">{{reverse ? '▲' : '▼'}}</span>
+                </th>
+                <th (click)="setOrder('nome')" scope="col">Nome
+                  <span *ngIf="order =='nome'">{{reverse ? '▲' : '▼'}}</span>
+                </th>
+                <th (click)="setOrder('validade')" scope="col">Validade
+                  <span *ngIf="order =='validade'">{{reverse ? '▲' : '▼'}}</span>
+                </th>
+                <th (click)="setOrder('dosagem')" scope="col">Dosagem
+                  <span *ngIf="order =='dosagem'">{{reverse ? '▲' : '▼'}}</span>
+                </th>
+                <th (click)="setOrder('aplicacao')" scope="col">Aplicação
+                  <span *ngIf="order =='aplicacao'">{{reverse ? '▲' : '▼'}}</span>
+                </th>
               </tr>
             </thead>
             <tbody class="tbody-resultados">
-              <tr #resultadosAntibiotico *ngFor="let antibiotico of antibioticos  | orderBy: order:reverse"
+              <tr #resultadosAntibiotico
+                *ngFor="let antibiotico of antibioticos | orderBy: order: reverse; let i = index"
                 attr.data-codigo-antibiotico="{{antibiotico.id}}"
                 attr.data-json-antibiotico="{{antibiotico.jsonAntibiotico}}" class="cursorPointer resultado">
                 <td>{{antibiotico.lote}}</td>

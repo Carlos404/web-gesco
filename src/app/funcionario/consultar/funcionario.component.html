@@ -20,25 +20,22 @@
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th [class.active]="order === 'nome'" (click)="setOrder('nome')" scope="col">Nome
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'tipoFuncionario'" (click)="setOrder('tipoFuncionario')" scope="col">Tipo
-                  Funcionário
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'dtNascimento'" (click)="setOrder('dtNascimento')" scope="col">Data
-                  Nascimento
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
-                <th [class.active]="order === 'nameUser'" (click)="setOrder('nameUser')" scope="col">Nome de
-                  usuário
-                  <span [hidden]="reverse">▼</span>
-                  <span [hidden]="!reverse">▲</span></th>
+                <th (click)="setOrder('nome')" scope="col">Nome
+                  <span *ngIf="order =='nome'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('tipoFuncionario')" scope="col">Tipo Funcionário
+                  <span *ngIf="order =='tipoFuncionario'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('dtNascimento')" scope="col">Data Nascimento
+                  <span *ngIf="order =='dtNascimento'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
+                <th (click)="setOrder('nameUser')" scope="col">Usuário
+                  <span *ngIf="order =='nameUser'">{{reverse ? '▲' : '▼'}}</span>  
+                </th>
               </tr>
             </thead>
             <tbody class="tbody-resultados">
-              <tr #resultadosFuncionario *ngFor="let funcionario of funcionarios | orderBy: order:reverse"
+              <tr #resultadosFuncionario *ngFor="let funcionario of funcionarios | orderBy: order: reverse; let i = index"
                 attr.data-codigo-funcionario="{{funcionario.idFuncionario}}"
                 attr.data-json-funcionario="{{funcionario.jsonFuncionario}}" class="cursorPointer resultado">
                 <td>{{funcionario.nome}}</td>
