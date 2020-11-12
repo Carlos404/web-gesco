@@ -5,10 +5,12 @@ export class Tratamento {
   fim_tratamento: Date;
   inicio_tratamento: string;
   obs: string;
-  funcionario: string;
-  antibioticos: string;
-  paciente: string;
-  statusTratamento: string;
+  funcionario: any;
+  antibioticos: any;
+  antibioticosId: any;
+  pacienteId: string;
+  paciente: any;
+  statusTratamento: any;
   jsonTratamento: string;
   medico: string;
 }

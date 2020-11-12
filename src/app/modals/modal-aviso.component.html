@@ -5,7 +5,11 @@
     </button>
 </div>
 <div class="modal-body">
-    <p>Deseja excluir o antibiótico {{antibiotico.nome}}?</p>
-    <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); excluiAntibiotico();">Sim</button>
-    <button type="button" class="btn btn-primary ml-2" routerLink="/antibiotico/consultar" (click)="activeModal.close('Close click')">Não</button>
+    <p *ngIf="!origemTratamento">Deseja excluir o antibiótico {{antibiotico.nome}}?</p>
+    <p *ngIf="origemTratamento && aprovacaoTratamento">Deseja aprovar o tratamento de {{tratamento.paciente}}</p>
+    <p *ngIf="origemTratamento && !aprovacaoTratamento">Deseja recusar o tratamento de {{tratamento.paciente}}</p>
+
+    <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); atualizaTratamento(aprovacaoTratamento);" *ngIf="origemTratamento">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); excluiAntibiotico();" *ngIf="!origemTratamento">Sim</button>
+    <button type="button" class="btn btn-primary ml-2" (click)="activeModal.close('Close click')">Não</button>
 </div>

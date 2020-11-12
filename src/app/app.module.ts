@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
 import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     imports: [
@@ -37,8 +38,9 @@ import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistr
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
-        OrderModule
-,
+        OrderModule,
+        NgSelectModule,
+        FormsModule,
         NgbModule
     ],
     declarations: [
@@ -68,6 +70,7 @@ import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistr
         ModalConsultaAntibiotico,
         ModalConsultaFuncionario,
         ModalConsultaTratamento,
+        CadastrarTratamentoComponent,
         NgbActiveModal,
         Funcionario,
         Paciente,

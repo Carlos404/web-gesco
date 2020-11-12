@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angu
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Helper } from '@app/_helpers/helper';
-import { Tratamento } from '@app/_models/tratamento';
+import { Tratamento } from '@app/_models/Tratamento';
 import { AuthenticationService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaTratamento } from '../modal/modalConsultaRegistroTratamento.component';

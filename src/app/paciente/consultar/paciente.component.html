@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="row d-flex justify-content-end mt-5">
+<div class="container {{origemTratamento ? 'mb-3' : '' }}">
+  <div class="row d-flex justify-content-end mt-5" *ngIf="!origemTratamento">
     <button class="btn btn-primary float-right col-1" routerLink="/paciente/cadastrar">Cadastrar</button>
   </div>
 
-  <div class="row">
+  <div class="{{origemTratamento ? '' : 'row' }}">
     <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit(pacienteForm.value)" class="w-100">
       <div class="card mt-4">
         <div class="card-body">

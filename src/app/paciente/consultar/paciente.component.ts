@@ -1,10 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { AuthenticationService, PacienteService } from '@app/_services';
+import { Router } from '@angular/router';
 import { Helper } from '@app/_helpers/helper';
 import { Paciente } from '@app/_models';
+import { AuthenticationService, PacienteService } from '@app/_services';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.component';
 
 @Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
@@ -21,18 +21,22 @@ export class ConsultarPacienteComponent implements OnInit {
   pacienteForm: FormGroup;
   submitted = false;
   jsonPaciente;
+  origemTratamento = false;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private pacienteService: PacienteService,
-    private authenticationService: AuthenticationService,
-    private modalService: NgbModal) {
+              private router: Router,
+              private pacienteService: PacienteService,
+              private authenticationService: AuthenticationService,
+              private modalService: NgbModal,
+              private activeModal: NgbActiveModal) {
     Helper.validaSessaoUsuario(this.authenticationService, this.router);
   }
 
   ngOnInit(): void {
-    this.consultaTodosPacientes()
-    this.pacienteForm = this.criaFormVazio()
+    if (!this.origemTratamento){
+      this.consultaTodosPacientes();
+    }
+    this.pacienteForm = this.criaFormVazio();
   }
 
   onSubmit(pacienteForm: NgForm) {
@@ -85,6 +89,17 @@ export class ConsultarPacienteComponent implements OnInit {
       );
   }
 
+  aplicaClickSelecionaPaciente() {
+    document.querySelectorAll('.resultado')
+            .forEach(resultado =>
+                     resultado.addEventListener('click', () => this.fechaModal(resultado.getAttribute('data-json-paciente')))
+      );
+  }
+
+  fechaModal(jsonPaciente){
+    this.activeModal.close(jsonPaciente);
+  }
+
   ngAfterViewInit() {
     this.things.changes.subscribe(t => {
       this.ngForRendred();
@@ -93,7 +108,7 @@ export class ConsultarPacienteComponent implements OnInit {
 
   ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.aplicaEventoDeClickConsultarRegistro();
+    this.origemTratamento ? this.aplicaClickSelecionaPaciente() : this.aplicaEventoDeClickConsultarRegistro();
   }
 
   open(jsonPaciente) {

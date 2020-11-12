@@ -50,5 +50,7 @@
 </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+  <button type="button" class="btn btn-primary" routerLink="/antibiotico/consultar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()" *ngIf="isMedico || isDesenvolvedor">Editar</button>
+  <button type="button" class="btn btn-success" (click)="activeModal.close('Close click'); open(true)" *ngIf="isFarmaceutico || isDesenvolvedor">Aprovar</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click'); open(false)" *ngIf="isFarmaceutico || isDesenvolvedor">Recusar</button>
 </div>
