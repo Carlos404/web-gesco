@@ -42,6 +42,13 @@ export class TratamentoService {
     );
   }
 
+  atualizaStatusTratamento(id: any, status: any): Observable<Tratamento> {
+    const url = `${apiUrl}/atualizar/${id}/${status}`;
+    return this.http.put(url, httpOptions).pipe(
+      catchError(this.handleError<any>('updateTratamento'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

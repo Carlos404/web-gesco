@@ -37,7 +37,6 @@ export class CadastrarTratamentoComponent implements OnInit {
         this.edicaoTratamento = true;
         this.tratamentoForm = this.criaFormEdicao(history.state.tratamento);
         this.adicionaValoresFormAntibiotico(history.state.tratamento.antibioticosId);
-        console.log(this.antibioticos.getRawValue())
       }else{
         this.edicaoTratamento = false;
         this.tratamentoForm = this.criaFormVazio();
@@ -105,7 +104,7 @@ export class CadastrarTratamentoComponent implements OnInit {
           inicio_tratamento: [tratamento.inicio_tratamento, Validators.required],
           fim_tratamento: [tratamento.fim_tratamento, Validators.required],
           doseDiario: [tratamento.doseDiario, Validators.required],
-          statusTratamento: [tratamento.statusTratamento],
+          statusTratamento: [0, Validators.required],
           obs: [tratamento.obs, Validators.required],
           nomePaciente: [tratamento.paciente, Validators.required],
           paciente: {id: tratamento.pacienteId},

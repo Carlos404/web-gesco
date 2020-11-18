@@ -32,7 +32,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     }
 
     open(aprovacao) {
-      console.log(aprovacao)
       const componentInstance = this.modalService.open(ModalAviso, { windowClass: 'mt-5'}).componentInstance;
       componentInstance.tratamento = this.tratamento;
       componentInstance.origemTratamento = true;

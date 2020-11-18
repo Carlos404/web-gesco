@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cargo } from '@app/enum/cargo';
 import { Helper } from '@app/_helpers/helper';
 import { Tratamento } from '@app/_models/Tratamento';
 import { AuthenticationService } from '@app/_services';
@@ -23,6 +24,8 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
   tratamentoForm: FormGroup;
   submitted = false;
+  isMedico = false;
+  isDesenvolvedor = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -35,7 +38,8 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
     this.consultaTodosTratamentos();
     this.tratamentoForm = this.criaFormVazio();
-
+    this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;
+    this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.DESENVOLEDOR.id;
   }
 
   onSubmit(tratamentoForm: NgForm) {

@@ -28,26 +28,9 @@ import { TratamentoService } from './../_services/tratamento.service';
     }
 
     atualizaTratamento(tratamentoAprovado){
-      const idTratamento = this.tratamento.id;
-
-      this.tratamento.statusTratamento = tratamentoAprovado ? 2 : 1;
-
-      this.tratamento.funcionario = {
-        idFuncionario: this.authenticationService.currentUserValue.id
-      };
-
-      this.tratamento.paciente = {
-        id: this.tratamento.pacienteId
-      };
-
-      delete this.tratamento.id;
-      console.log(this.tratamento)
-      this.tratamentoService.updateTratamento(idTratamento, this.tratamento)
-            .subscribe(res => {
-                this.router.navigate(['tratamento/consultar']);
-            }, (err) => {
-                console.log(err);
-            });
+      const statusTratamento = tratamentoAprovado ? 2 : 1;
+      this.tratamentoService.atualizaStatusTratamento(this.tratamento.id, statusTratamento)
+          .toPromise().then(data => window.location.reload());
       }
 
   }

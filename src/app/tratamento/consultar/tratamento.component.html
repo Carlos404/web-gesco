@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row d-flex justify-content-end mt-5">
-        <button class="btn btn-primary float-right col-1" routerLink="/tratamento/cadastrar">Cadastrar</button>
+        <button class="btn btn-primary float-right col-1" routerLink="/tratamento/cadastrar" *ngIf="isMedico || isDesenvolvedor">Cadastrar</button>
     </div>
 
     <div class="row">
