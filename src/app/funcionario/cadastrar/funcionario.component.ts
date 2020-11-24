@@ -8,7 +8,6 @@ import { AuthenticationService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { FuncionarioService } from '@app/_services/Funcionario.service';
 
-
 @Component({templateUrl: 'funcionario.component.html'})
 export class CadastrarFuncionarioComponent implements OnInit {
 
@@ -93,5 +92,4 @@ export class CadastrarFuncionarioComponent implements OnInit {
     isEdicao(){
       return history.state.funcionario;
   }
-
 }

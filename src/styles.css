@@ -1,12 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+.body {
+    background: #e9ecef;
+}
 
 .criarConta {
     margin-left: 70%;
 }
 
-.cursorPointer{
+.cursorPointer {
     cursor: pointer;
 }
 
@@ -32,6 +36,7 @@
     border-color: #dcdde1;
     border-radius: 5px;
     margin-top: 50px;
+    background: #fff;
 }
 
 .underDivsor {

@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
-import { FuncionarioService } from '@app/_services/Funcionario.service';
-import { Funcionario } from '@app/_models/Funcionario';
+import { Funcionario } from '@app/_models/funcionario';
 import { ModalConsultaFuncionario } from '../modal/modalConsultaRegistroFuncionario.component';
 import { Cargo } from '@app/enum/cargo';
 import { Title } from '@angular/platform-browser';
@@ -26,11 +25,11 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   funcionarioForm: FormGroup;
   submitted = false;
   verify: boolean = false;
+  funcionarioService: any;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private title: Title,
-    private funcionarioService: FuncionarioService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
     Helper.validaSessaoUsuario(this.authenticationService, this.router);
