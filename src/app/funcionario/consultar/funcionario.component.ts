@@ -8,9 +8,10 @@ import { FuncionarioService } from '@app/_services/Funcionario.service';
 import { Funcionario } from '@app/_models/Funcionario';
 import { ModalConsultaFuncionario } from '../modal/modalConsultaRegistroFuncionario.component';
 import { Cargo } from '@app/enum/cargo';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
-export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
+export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
 
   order: string = 'nome';
   reverse: boolean = false;
@@ -24,16 +25,19 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
 
   funcionarioForm: FormGroup;
   submitted = false;
+  verify: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private funcionarioService: FuncionarioService,
-              private authenticationService: AuthenticationService,
-              private modalService: NgbModal) {
-       Helper.validaSessaoUsuario(this.authenticationService, this.router);
-   }
+    private router: Router,
+    private title: Title,
+    private funcionarioService: FuncionarioService,
+    private authenticationService: AuthenticationService,
+    private modalService: NgbModal) {
+    Helper.validaSessaoUsuario(this.authenticationService, this.router);
+  }
 
   ngOnInit(): void {
+    this.title.setTitle('Funcionários | GESCO')
     this.consultaTodosFuncionarios();
     this.funcionarioForm = this.criaFormVazio();
   }
@@ -46,23 +50,23 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
   consultaTodosFuncionarios() {
 
     this.funcionarioService.getAllFuncionarios().toPromise()
-        .then(data => {
-          if (data){
-            this.manipulaRetorno(data);
-          }
-        });
+      .then(data => {
+        if (data) {
+          this.manipulaRetorno(data);
+        }
+      });
   }
 
   consultaFuncionario(id) {
     this.funcionarioService.getFuncionario(id).toPromise()
-        .then(data => {
-          if (data){
-            this.manipulaRetorno(data);
-          }else{
-            document.getElementById('resultado').classList.add('d-none');
-            alert('Funcionário não encontrado');
-          }
-        });
+      .then(data => {
+        if (data) {
+          this.manipulaRetorno(data);
+        } else {
+          document.getElementById('resultado').classList.add('d-none');
+          alert('Funcionário não encontrado');
+        }
+      });
   }
 
   setOrder(order) {
@@ -83,13 +87,13 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  removeDesenvolvedoresDaLista(funcionario: Funcionario){
+  removeDesenvolvedoresDaLista(funcionario: Funcionario) {
     const cargoDesenvolvedor = Cargo.cargos.DESENVOLEDOR.id;
 
     if (this.authenticationService.currentUserValue.tipoUser === cargoDesenvolvedor) {
       return true;
     }
-    if (funcionario.tipoFuncionario.toString() !== cargoDesenvolvedor.toString()){
+    if (funcionario.tipoFuncionario.toString() !== cargoDesenvolvedor.toString()) {
       return true;
     }
 
@@ -101,16 +105,19 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  ngForRendred(){
+  ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.aplicaEventoDeClickConsultarRegistro();
+    if (this.verify === false) {
+      this.aplicaEventoDeClickConsultarRegistro();
+    }
   }
 
-  aplicaEventoDeClickConsultarRegistro(){
+  aplicaEventoDeClickConsultarRegistro() {
+    this.verify = true;
     document.querySelectorAll('.resultado')
-            .forEach(resultado =>
-                     resultado.addEventListener('click', () => this.open(resultado.getAttribute('data-json-funcionario')))
-    );
+      .forEach(resultado =>
+        resultado.addEventListener('click', () => this.open(resultado.getAttribute('data-json-funcionario')))
+      );
   }
 
   open(jsonFuncionario) {
@@ -123,9 +130,9 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit  {
     }
   }
 
-  criaFormVazio(){
+  criaFormVazio() {
     return this.formBuilder.group({
-        nome: ['', Validators.required],
+      nome: ['', Validators.required],
     });
   }
 }

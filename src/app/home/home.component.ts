@@ -1,16 +1,18 @@
 ﻿import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
-import { User } from '@app/_models';
-import { AuthenticationService, UserService } from '@app/_services';
+import { AuthenticationService } from '@app/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     loading = false;
     nomeUsuario: string;
-    constructor(private authenticationService: AuthenticationService) { }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private title: Title) { }
 
     ngOnInit() {
+        this.title.setTitle('GESCO')
         this.loading = false;
         this.nomeUsuario = this.authenticationService.currentUserValue.nome;
     }

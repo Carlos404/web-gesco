@@ -1,11 +1,13 @@
 import { Funcionario } from '@app/_models/funcionario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { FuncionarioService } from '@app/_services/Funcionario.service';
+
 
 @Component({templateUrl: 'funcionario.component.html'})
 export class CadastrarFuncionarioComponent implements OnInit {
@@ -18,6 +20,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private title: Title,
         private authenticationService: AuthenticationService,
         private funcionarioService: FuncionarioService
     ) {
@@ -25,6 +28,12 @@ export class CadastrarFuncionarioComponent implements OnInit {
     }
 
     ngOnInit() {
+      if(this.isEdicao() === undefined) {
+        this.title.setTitle('Cadastro Funcionário | GESCO ')
+      }
+      else {
+        this.title.setTitle('Editar Funcionário | GESCO')
+      }
       this.acessoDev = this.authenticationService.currentUserValue.tipoUser === 0;
       this.funcionarioForm = this.isEdicao() ? this.criaFormEdicao(history.state.funcionario) : this.criaFormVazio();
     }

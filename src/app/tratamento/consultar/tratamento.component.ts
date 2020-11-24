@@ -14,6 +14,7 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
   order: string = 'paciente';
   reverse: boolean = false;
+  verify: boolean = false;
 
   @ViewChildren('resultadosTratamento') things: QueryList<any>;
 
@@ -82,12 +83,15 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  ngForRendred(){
+  ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.aplicaEventoDeClickConsultarRegistro();
+    if(this.verify === false) {
+      this.aplicaEventoDeClickConsultarRegistro();
+    }
   }
 
   aplicaEventoDeClickConsultarRegistro(){
+    this.verify = true;
     document.querySelectorAll('.resultado')
             .forEach(resultado =>
                      resultado.addEventListener('click', () => this.open(resultado.getAttribute('data-json-tratamento')))

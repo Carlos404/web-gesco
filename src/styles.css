@@ -34,6 +34,10 @@
     margin-top: 50px;
 }
 
+.underDivsor {
+    padding: 10px;
+}
+
 .menu {
     background-color: #487eb0;
     top: 0px;
@@ -55,6 +59,7 @@
 .formInputs {
     justify-content: space-around !important;
     margin-right: 130px;
+    align-items: flex-end;
 }
 
 .inputAplicacao {
@@ -64,4 +69,8 @@
 
 .btnSubmit {
     margin-left: 85px;
+}
+
+.titleGrid {
+    min-width: 200px;
 }

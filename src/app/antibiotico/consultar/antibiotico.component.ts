@@ -7,6 +7,7 @@ import { Helper } from '@app/_helpers/helper';
 import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
 import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
@@ -26,6 +27,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private title: Title,
     private antibioticoService: AntibioticoService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
@@ -33,6 +35,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Antibióticos | GESCO ')
     this.consultaTodosAntibioticos();
     this.antibioticoForm = this.criaFormVazio();
   }
@@ -77,7 +80,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
     if (this.order === order) {
       this.reverse = !this.reverse;
     }
-
     this.order = order;
   }
 
@@ -89,7 +91,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
   ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    if(this.verify === false) {
+    if (this.verify === false) {
       this.aplicaEventoDeClickConsultarRegistro();
     }
   }

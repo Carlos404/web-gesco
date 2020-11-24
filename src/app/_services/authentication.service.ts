@@ -3,10 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
-const apiUrl = 'https://gesco-api.herokuapp.com/login';
+const apiUrl = '//gesco-api.herokuapp.com/login';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

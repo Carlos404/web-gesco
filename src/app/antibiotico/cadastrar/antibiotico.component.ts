@@ -5,6 +5,7 @@ import { AuthenticationService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-antibiotico', templateUrl: 'antibiotico.component.html'})
 export class CadastrarAntibioticoComponent implements OnInit {
@@ -15,12 +16,20 @@ export class CadastrarAntibioticoComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private title: Title,
               private antibioticoService: AntibioticoService,
               private authenticationService: AuthenticationService) {
         Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
+        if(this.isEdicao() === undefined) {
+            this.title.setTitle('Cadastro Antibiótico | GESCO ')
+          }
+          else {
+            this.title.setTitle('Editar Antibiótico | GESCO')
+          }
+
         this.antibioticoForm = this.isEdicao() ? this.criaFormEdicao(history.state.antibiotico) : this.criaFormVazio();
     }
 
@@ -32,7 +41,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
     }
     updateAntibiotico(antibioticoForm: NgForm) {
         this.antibioticoService.updateAntibiotico(history.state.antibiotico.id, antibioticoForm)
-            .subscribe(res => {
+            .subscribe(res =>  {
                 this.router.navigate(['antibiotico/consultar']);
             }, (err) => {
                 console.log(err);
@@ -56,7 +65,9 @@ export class CadastrarAntibioticoComponent implements OnInit {
             dosagem: [antibiotico.dosagem, Validators.required],
             aplicacao: [antibiotico.aplicacao, Validators.required],
             funcionario: {idFuncionario: antibiotico.idFuncionario}
-        });
+        }
+        
+        );
     }
 
     criaFormVazio(){

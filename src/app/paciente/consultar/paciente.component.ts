@@ -12,6 +12,7 @@ export class ConsultarPacienteComponent implements OnInit {
 
   order: string = 'registry';
   reverse: boolean = false;
+  verify: boolean = false;
 
   @ViewChildren('resultadosPaciente') things: QueryList<any>;
 
@@ -22,6 +23,7 @@ export class ConsultarPacienteComponent implements OnInit {
   submitted = false;
   jsonPaciente;
   origemTratamento = false;
+  
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -83,6 +85,7 @@ export class ConsultarPacienteComponent implements OnInit {
   }
 
   aplicaEventoDeClickConsultarRegistro() {
+    this.verify = true;
     document.querySelectorAll(".resultado")
       .forEach(resultado =>
         resultado.addEventListener("click", () => this.open(resultado.getAttribute("data-json-paciente")))
@@ -108,7 +111,9 @@ export class ConsultarPacienteComponent implements OnInit {
 
   ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.origemTratamento ? this.aplicaClickSelecionaPaciente() : this.aplicaEventoDeClickConsultarRegistro();
+    if(this.verify === false) {
+      this.aplicaEventoDeClickConsultarRegistro();
+    }
   }
 
   open(jsonPaciente) {
