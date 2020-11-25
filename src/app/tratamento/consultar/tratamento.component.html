@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row d-flex justify-content-end mt-5">
-        <button class="btn btn-primary float-right col-1" routerLink="/tratamento/cadastrar" *ngIf="isMedico || isDesenvolvedor">Cadastrar</button>
+        <button class="btn btn-primary float-right col-1" routerLink="/tratamento/cadastrar"
+            *ngIf="isMedico || isDesenvolvedor">Cadastrar</button>
     </div>
 
     <div class="row">
@@ -9,9 +10,11 @@
                 <div class="card-body">
                     <h2 class="mt-3">Consultar Tratamento</h2>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" formControlName="nome" placeholder="Nome ou registro de atendimento do paciente" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" formControlName="nome"
+                            placeholder="Nome ou registro de atendimento do paciente" aria-label="Recipient's username"
+                            aria-describedby="button-addon2">
                         <div class="input-group-append">
-                            <button  class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
+                            <button class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
                         </div>
                     </div>
                 </div>
@@ -20,26 +23,33 @@
                         <thead class="thead-light">
                             <tr>
                                 <th (click)="setOrder('paciente')" scope="col">Paciente
-                                    <span *ngIf="order =='paciente'">{{reverse ? '▲' : '▼'}}</span>  
-                                  </th>
-                                  <th (click)="setOrder('diagnostico')" scope="col">Diagnostico
-                                    <span *ngIf="order =='diagnostico'">{{reverse ? '▲' : '▼'}}</span>  
-                                  </th>
-                                  <th (click)="setOrder('inicio_tratamento')" scope="col">Início Tratamento
-                                    <span *ngIf="order =='inicio_tratamento'">{{reverse ? '▲' : '▼'}}</span>  
-                                  </th>
-                                  <th (click)="setOrder('fim_tratamento')" scope="col">Fim Tratamento
-                                    <span *ngIf="order =='fim_tratamento'">{{reverse ? '▲' : '▼'}}</span>  
-                                  </th>
+                                    <span *ngIf="order =='paciente'">{{reverse ? '▲' : '▼'}}</span>
+                                </th>
+                                <th (click)="setOrder('diagnostico')" scope="col">Diagnostico
+                                    <span *ngIf="order =='diagnostico'">{{reverse ? '▲' : '▼'}}</span>
+                                </th>
+                                <th (click)="setOrder('inicio_tratamento')" scope="col">Início Tratamento
+                                    <span *ngIf="order =='inicio_tratamento'">{{reverse ? '▲' : '▼'}}</span>
+                                </th>
+                                <th (click)="setOrder('fim_tratamento')" scope="col">Fim Tratamento
+                                    <span *ngIf="order =='fim_tratamento'">{{reverse ? '▲' : '▼'}}</span>
+                                </th>
+                                <th (click)="setOrder('statusTratamento')" scope="col">Status
+                                    <span *ngIf="order =='statusTratamento'">{{reverse ? '▲' : '▼'}}</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="tbody-resultados">
-                          <tr #resultadosTratamento *ngFor="let tratamento of tratamentos | orderBy: order: reverse; " attr.data-codigo-paciente="{{tratamento.id}}" attr.data-json-tratamento="{{tratamento.jsonTratamento}}" class="cursorPointer resultado">
-                            <td>{{tratamento.paciente}}</td>
-                            <td>{{tratamento.diagnostico}}</td>
-                            <td>{{tratamento.inicio_tratamento | date: 'dd/MM/yyyy'}}</td>
-                            <td>{{tratamento.fim_tratamento | date: 'dd/MM/yyyy'}}</td>
-                        </tr>
+                            <tr #resultadosTratamento *ngFor="let tratamento of tratamentos | orderBy: order: reverse; "
+                                attr.data-codigo-paciente="{{tratamento.id}}"
+                                attr.data-json-tratamento="{{tratamento.jsonTratamento}}"
+                                class="cursorPointer resultado">
+                                <td>{{tratamento.paciente}}</td>
+                                <td>{{tratamento.diagnostico}}</td>
+                                <td>{{tratamento.inicio_tratamento | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{tratamento.fim_tratamento | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{tratamento.statusTratamento | getStatusTratamentoPeloCodigo}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -47,4 +57,3 @@
         </form>
     </div>
 </div>
-

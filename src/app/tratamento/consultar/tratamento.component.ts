@@ -8,6 +8,7 @@ import { AuthenticationService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaTratamento } from '../modal/modalConsultaRegistroTratamento.component';
 import { TratamentoService } from './../../_services/tratamento.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-consulta-tratamento', templateUrl: 'tratamento.component.html' })
 export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
@@ -30,6 +31,7 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private title: Title,
               private tratamentoService: TratamentoService,
               private authenticationService: AuthenticationService,
               private modalService: NgbModal) {
@@ -37,6 +39,7 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
    }
 
   ngOnInit(): void {
+    this.title.setTitle('Tratamentos | GESCO ');
     this.consultaTodosTratamentos();
     this.tratamentoForm = this.criaFormVazio();
     this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;

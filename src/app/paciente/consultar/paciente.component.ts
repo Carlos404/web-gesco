@@ -6,6 +6,7 @@ import { Paciente } from '@app/_models';
 import { AuthenticationService, PacienteService } from '@app/_services';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
@@ -27,6 +28,7 @@ export class ConsultarPacienteComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private title: Title,
               private pacienteService: PacienteService,
               private authenticationService: AuthenticationService,
               private modalService: NgbModal,
@@ -35,6 +37,7 @@ export class ConsultarPacienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Pacientes | GESCO ');
     if (!this.origemTratamento){
       this.consultaTodosPacientes();
     }

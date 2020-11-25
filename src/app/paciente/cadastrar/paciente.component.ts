@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService, PacienteService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { Paciente } from '@app/_models';
+import { Title } from '@angular/platform-browser';
 
 @Component({ selector: 'app-paciente', templateUrl: 'paciente.component.html'})
 export class CadastrarPacienteComponent implements OnInit {
@@ -14,12 +15,19 @@ export class CadastrarPacienteComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
      private router: Router,
+     private title: Title,
      private paciente: PacienteService,
      private authenticationService: AuthenticationService) {
         Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
+        if(this.isEdicao() === undefined) {
+            this.title.setTitle('Cadastro Paciente | GESCO ');
+          }
+          else {
+            this.title.setTitle('Editar Paciente | GESCO');
+          }
         this.pacienteForm = this.isEdicao() ? this.criaFormEdicao(history.state.paciente) : this.criaFormVazio();
     }
     onSubmit(pacienteForm: NgForm) {
