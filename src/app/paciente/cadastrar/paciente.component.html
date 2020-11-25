@@ -5,7 +5,7 @@
       <div class="form-row formInputs">
         <div class="form-group col-md-3">
           <label class="font-weight-bold titleGrid" for="lote">Registro Atendimento</label>
-          <input type="text" formControlName="nome" class="form-control inputs"
+          <input type="text" formControlName="registry" class="form-control inputs"
             [ngClass]="{ 'is-invalid': submitted && f.registry.errors }" />
           <div *ngIf="submitted && f.registry.errors" class="invalid-feedback">
             <div *ngIf="f.registry.errors.required">Registro é obrigatório</div>
@@ -16,9 +16,9 @@
           <label class="font-weight-bold" for="nome">Nome</label>
 
           <input type="text" formControlName="nome" class="form-control inputs"
-          [ngClass]="{ 'is-invalid': submitted && f.registry.errors }" />
-        <div *ngIf="submitted && f.registry.errors" class="invalid-feedback">
-          <div *ngIf="f.registry.errors.required">Nome é obrigatório</div>
+          [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+        <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+          <div *ngIf="f.nome.errors.required">Nome é obrigatório</div>
           </div>
         </div>
       </div>

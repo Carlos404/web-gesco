@@ -25,12 +25,13 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
 import { Funcionario } from './_models/funcionario';
-import { GetCargoPipe, GetStatusTratamentoPipe } from './_helpers/util.pipes';
+import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe } from './_helpers/util.pipes';
 import { OrderModule } from 'ngx-order-pipe';
 import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
 import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxUiLoaderModule } from "ngx-ui-loader"
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
         OrderModule,
         NgSelectModule,
         FormsModule,
-        NgbModule
+        NgbModule,
+        NgxUiLoaderModule
     ],
     declarations: [
         AppComponent,
@@ -61,6 +63,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
         ModalConsultaTratamento,
         GetCargoPipe,
         GetStatusTratamentoPipe,
+        GetNomeSexoPipe,
         ModalAviso  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

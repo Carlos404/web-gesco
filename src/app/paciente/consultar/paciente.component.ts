@@ -7,6 +7,7 @@ import { AuthenticationService, PacienteService } from '@app/_services';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaPaciente } from '../modal/modalConsultaRegistroPaciente.component';
 import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
@@ -32,16 +33,19 @@ export class ConsultarPacienteComponent implements OnInit {
               private pacienteService: PacienteService,
               private authenticationService: AuthenticationService,
               private modalService: NgbModal,
+              private ngxLoader: NgxUiLoaderService,
               private activeModal: NgbActiveModal) {
     Helper.validaSessaoUsuario(this.authenticationService, this.router);
   }
 
   ngOnInit(): void {
+    this.ngxLoader.start();
     this.title.setTitle('Pacientes | GESCO ');
     if (!this.origemTratamento){
       this.consultaTodosPacientes();
     }
     this.pacienteForm = this.criaFormVazio();
+    this.ngxLoader.stop();
   }
 
   onSubmit(pacienteForm: NgForm) {
