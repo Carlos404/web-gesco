@@ -6,6 +6,7 @@ import { Helper } from '@app/_helpers/helper';
 import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
 import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-antibiotico', templateUrl: 'antibiotico.component.html'})
 export class CadastrarAntibioticoComponent implements OnInit {
@@ -17,12 +18,14 @@ export class CadastrarAntibioticoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private title: Title,
+              private ngxLoader: NgxUiLoaderService,
               private antibioticoService: AntibioticoService,
               private authenticationService: AuthenticationService) {
         Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
+        this.ngxLoader.start();
         if(this.isEdicao() === undefined) {
             this.title.setTitle('Cadastro Antibiótico | GESCO ')
           }
@@ -31,13 +34,16 @@ export class CadastrarAntibioticoComponent implements OnInit {
           }
 
         this.antibioticoForm = this.isEdicao() ? this.criaFormEdicao(history.state.antibiotico) : this.criaFormVazio();
+        this.ngxLoader.stop();
     }
 
     onSubmit(antibiotico: NgForm) {
+        this.ngxLoader.start();
         this.submitted = true;
         if (this.isFormInvalido()) { return; }
 
-        this.isEdicao() ? this.updateAntibiotico(antibiotico) : this.addAntibiotico(antibiotico)
+        this.isEdicao() ? this.updateAntibiotico(antibiotico) : this.addAntibiotico(antibiotico);
+        this.ngxLoader.stop();
     }
     updateAntibiotico(antibioticoForm: NgForm) {
         this.antibioticoService.updateAntibiotico(history.state.antibiotico.id, antibioticoForm)

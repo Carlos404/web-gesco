@@ -9,6 +9,7 @@ import { FuncionarioService } from '@app/_services/Funcionario.service';
 import { ModalConsultaFuncionario } from '../modal/modalConsultaRegistroFuncionario.component';
 import { Cargo } from '@app/enum/cargo';
 import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
 export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
@@ -30,6 +31,7 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private title: Title,
+    private ngxLoader: NgxUiLoaderService,
     private funcionarioService: FuncionarioService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
@@ -37,9 +39,11 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.ngxLoader.start();
     this.title.setTitle('Funcionários | GESCO')
     this.consultaTodosFuncionarios();
     this.funcionarioForm = this.criaFormVazio();
+    this.ngxLoader.stop();
   }
 
   onSubmit(funcionarioForm: NgForm) {

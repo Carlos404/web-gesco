@@ -35,6 +35,7 @@ export class CadastrarPacienteComponent implements OnInit {
         this.ngxLoader.stop();
     }
     onSubmit(pacienteForm: NgForm) {
+        this.ngxLoader.start();
         this.submitted = true;
 
         if (this.isFormInvalido()) {
@@ -46,6 +47,7 @@ export class CadastrarPacienteComponent implements OnInit {
         }else{
             this.addPaciente(pacienteForm);
         }
+        this.ngxLoader.stop();
     }
     updatePaciente(pacienteForm: NgForm) {
         this.paciente.updatePaciente(history.state.paciente.id, pacienteForm)

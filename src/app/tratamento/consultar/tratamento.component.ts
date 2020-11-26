@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaTratamento } from '../modal/modalConsultaRegistroTratamento.component';
 import { TratamentoService } from './../../_services/tratamento.service';
 import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-consulta-tratamento', templateUrl: 'tratamento.component.html' })
 export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
@@ -33,17 +34,20 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
               private router: Router,
               private title: Title,
               private tratamentoService: TratamentoService,
+              private ngxLoader: NgxUiLoaderService,
               private authenticationService: AuthenticationService,
               private modalService: NgbModal) {
        Helper.validaSessaoUsuario(this.authenticationService, this.router);
    }
 
   ngOnInit(): void {
+    this.ngxLoader.start();
     this.title.setTitle('Tratamentos | GESCO ');
     this.consultaTodosTratamentos();
     this.tratamentoForm = this.criaFormVazio();
     this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;
     this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.DESENVOLEDOR.id;
+    this.ngxLoader.stop();
   }
 
   onSubmit(tratamentoForm: NgForm) {
