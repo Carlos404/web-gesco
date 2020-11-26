@@ -18,7 +18,7 @@
     <div class="form-row">
         <div class="form-group col-md-5">
             <label class="font-weight-bold" for="sexo">Sexo</label>
-            <span class="d-block">{{funcionario.sexo}}</span>
+            <span class="d-block">{{funcionario.sexo | getNomeSexoPeloCodigo}}</span>
         </div>
 
         <div class="form-group col-md-5">
@@ -39,4 +39,5 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Remover</button>
 </div>
