@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConsultarPacienteComponent } from '@app/paciente/consultar/paciente.component';
 import { Helper } from '@app/_helpers/helper';
@@ -9,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Antibiotico } from './../../_models/antibiotico';
 import { AntibioticoService } from './../../_services/antibiotico.service';
 import { TratamentoService } from './../../_services/tratamento.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-cadastro-tratamento', templateUrl: 'tratamento.component.html'})
 export class CadastrarTratamentoComponent implements OnInit {
@@ -24,6 +26,8 @@ export class CadastrarTratamentoComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private title: Title,
+        private ngxLoader: NgxUiLoaderService,
         private authenticationService: AuthenticationService,
         private antibioticoService: AntibioticoService,
         private tratamento: TratamentoService,
@@ -33,6 +37,14 @@ export class CadastrarTratamentoComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.ngxLoader.start();
+      if(this.isEdicao() === undefined) {
+        this.title.setTitle('Cadastro Tratamento | GESCO ')
+      }
+      else {
+        this.title.setTitle('Editar Tratamento | GESCO')
+      }
+
       if (this.isEdicao()){
         this.edicaoTratamento = true;
         this.tratamentoForm = this.criaFormEdicao(history.state.tratamento);
@@ -43,10 +55,12 @@ export class CadastrarTratamentoComponent implements OnInit {
       }
       this.antibioticos.removeAt(0);
       this.consultaTodosAntibioticos();
+      this.ngxLoader.stop();
     }
     get f() { return this.tratamentoForm.controls; }
 
     onSubmit(tratamentoForm: NgForm) {
+      this.ngxLoader.start();
         this.antibioticos.removeAt(0);
 
         this.submitted = true;
@@ -62,6 +76,7 @@ export class CadastrarTratamentoComponent implements OnInit {
         }
 
         this.isEdicao() ? this.updateTratamento(tratamentoForm) : this.addTratamento(tratamentoForm);
+        this.ngxLoader.stop();
     }
 
     updateTratamento(tratamentoForm: NgForm) {

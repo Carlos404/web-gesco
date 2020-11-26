@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Funcionario } from '@app/_models/funcionario';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Funcionario } from '@app/_models/funcionario';
 
 @Component({templateUrl: './modalConsultaRegistroAntibiotico.component.html'})
   export class ModalConsultaFuncionario implements OnInit {

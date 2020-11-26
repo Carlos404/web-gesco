@@ -8,12 +8,15 @@ import { AuthenticationService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultaTratamento } from '../modal/modalConsultaRegistroTratamento.component';
 import { TratamentoService } from './../../_services/tratamento.service';
+import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-consulta-tratamento', templateUrl: 'tratamento.component.html' })
 export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
   order: string = 'paciente';
   reverse: boolean = false;
+  verify: boolean = false;
 
   @ViewChildren('resultadosTratamento') things: QueryList<any>;
 
@@ -29,17 +32,22 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private title: Title,
               private tratamentoService: TratamentoService,
+              private ngxLoader: NgxUiLoaderService,
               private authenticationService: AuthenticationService,
               private modalService: NgbModal) {
        Helper.validaSessaoUsuario(this.authenticationService, this.router);
    }
 
   ngOnInit(): void {
+    this.ngxLoader.start();
+    this.title.setTitle('Tratamentos | GESCO ');
     this.consultaTodosTratamentos();
     this.tratamentoForm = this.criaFormVazio();
     this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;
     this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.DESENVOLEDOR.id;
+    this.ngxLoader.stop();
   }
 
   onSubmit(tratamentoForm: NgForm) {
@@ -82,12 +90,15 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  ngForRendred(){
+  ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    this.aplicaEventoDeClickConsultarRegistro();
+    if(this.verify === false) {
+      this.aplicaEventoDeClickConsultarRegistro();
+    }
   }
 
   aplicaEventoDeClickConsultarRegistro(){
+    this.verify = true;
     document.querySelectorAll('.resultado')
             .forEach(resultado =>
                      resultado.addEventListener('click', () => this.open(resultado.getAttribute('data-json-tratamento')))

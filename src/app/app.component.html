@@ -6,11 +6,13 @@
     <div class="navbar-nav" *ngFor="let acesso of acessos">
         <a class="nav-item nav-link" routerLink="{{acesso.routerLink}}">{{acesso.nomeItem}}</a>
     </div>
-    
+
     <div class="navbar-nav">
         <a class="nav-item nav-link cursorPointer" (click)="logout()">Sair</a>
     </div>
 </nav>
 
-    <router-outlet></router-outlet>
-    <div class="container">
+<router-outlet></router-outlet>
+<ngx-ui-loader></ngx-ui-loader>
+<div class="container">
+    

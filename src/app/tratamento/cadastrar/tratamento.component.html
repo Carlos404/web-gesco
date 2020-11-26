@@ -1,77 +1,83 @@
 <div class="container">
-  <h2>Iniciar Tratamento</h2>
   <form [formGroup]="tratamentoForm" (ngSubmit)="onSubmit(tratamentoForm.value)">
-    <div class="form-row">
-      <div class="col-md-3">
+    <div class="divsor container">
+      <div class="divsorTexto">Iniciar Tratamento</div>
+      <div class="form-row">
+        <div class="col-md-3">
           <label for="nome">Paciente</label>
           <div class="input-group-prepend">
-            <button class="btn btn-primary" type="button" (click)="openPaciente()" >Procurar</button>
-            <input type="text" formControlName="nomePaciente"  id="nomePaciente" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nomePaciente.errors }" disabled/>
+            <button class="btn btn-primary" type="button" (click)="openPaciente()">Procurar</button>
+            <input type="text" formControlName="nomePaciente" id="nomePaciente" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.nomePaciente.errors }" disabled />
             <div *ngIf="submitted && f.nomePaciente.errors" class="invalid-feedback">
-                <div *ngIf="f.nomePaciente.errors.required">O paciente é obrigatório</div>
+              <div *ngIf="f.nomePaciente.errors.required">O paciente é obrigatório</div>
             </div>
           </div>
         </div>
-      <div class="col-md-3">
+        <div class="col-md-3">
           <label for="nome">Diagnóstico</label>
-          <input type="text" formControlName="diagnostico" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.diagnostico.errors }" />
+          <input type="text" formControlName="diagnostico" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.diagnostico.errors }" />
           <div *ngIf="submitted && f.diagnostico.errors" class="invalid-feedback">
-              <div *ngIf="f.diagnostico.errors.required">O diagnóstico é obrigatório</div>
+            <div *ngIf="f.diagnostico.errors.required">O diagnóstico é obrigatório</div>
           </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label for="dataNascimento">Data Inicio do tratamento</label>
-        <input type="date" formControlName="inicio_tratamento" min="0001-01-01" max="9999-12-31" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.inicio_tratamento.errors }" required/>
-        <div *ngIf="submitted && f.inicio_tratamento.errors" class="invalid-feedback">
-            <div *ngIf="f.inicio_tratamento.errors.required">Data de inicio é obrigatória</div>
         </div>
       </div>
 
-    <div class="form-group col-md-3">
-      <label for="dataNascimento">Data fim do tratamento</label>
-      <input type="date" formControlName="fim_tratamento" min="0001-01-01" max="9999-12-31" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fim_tratamento.errors }" required/>
-      <div *ngIf="submitted && f.fim_tratamento.errors" class="invalid-feedback">
-          <div *ngIf="f.fim_tratamento.errors.required">Data fim é obrigatória</div>
-      </div>
-    </div>
-  </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="dataNascimento">Data Inicio do tratamento</label>
+          <input type="date" formControlName="inicio_tratamento" min="0001-01-01" max="9999-12-31" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.inicio_tratamento.errors }" required />
+          <div *ngIf="submitted && f.inicio_tratamento.errors" class="invalid-feedback">
+            <div *ngIf="f.inicio_tratamento.errors.required">Data de inicio é obrigatória</div>
+          </div>
+        </div>
 
-      <div class="form-row" >
+        <div class="form-group col-md-3">
+          <label for="dataNascimento">Data fim do tratamento</label>
+          <input type="date" formControlName="fim_tratamento" min="0001-01-01" max="9999-12-31" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.fim_tratamento.errors }" required />
+          <div *ngIf="submitted && f.fim_tratamento.errors" class="invalid-feedback">
+            <div *ngIf="f.fim_tratamento.errors.required">Data fim é obrigatória</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group col-md-6">
           <label for="dataNascimento">Antibióticos</label>
-          <ng-select [items]="listaAntibioticos"
-              bindLabel="nome"
-              bindValue="id"
-              [multiple]="true"
-              placeholder="Selecione os antibióticos"
-              [(ngModel)]="antibioticosSelecionados" (change)="adicionaAntibiotico()" (clear)="limpaAntibioticos()" formControlName="multiplosAntibioticos">
+          <ng-select [items]="listaAntibioticos" bindLabel="nome" bindValue="id" [multiple]="true"
+            placeholder="Selecione os antibióticos" [(ngModel)]="antibioticosSelecionados"
+            (change)="adicionaAntibiotico()" (clear)="limpaAntibioticos()" formControlName="multiplosAntibioticos">
           </ng-select>
+
         </div>
       </div>
 
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label for="dataNascimento">Dosagem</label>
-          <input type="number" min="0"  class="form-control" formControlName="doseDiario" [ngClass]="{ 'is-invalid': submitted && f.doseDiario.errors }">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="dataNascimento">Dosagem</label>
+          <input type="number" placeholder="0,0 (g,mg)" min="0" max="1000" step="0.1" value="0.00" class="form-control"
+            formControlName="doseDiario" [ngClass]="{ 'is-invalid': submitted && f.doseDiario.errors }">
           <div *ngIf="submitted && f.doseDiario.errors" class="invalid-feedback">
             <div *ngIf="f.doseDiario.errors.required">Dosagem é obrigatória</div>
           </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label for="dataNascimento">Observações</label>
-          <input type="text" formControlName="obs" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.obs.errors }" />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="dataNascimento">Observações</label>
+          <input type="text" formControlName="obs" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.obs.errors }" />
           <div *ngIf="submitted && f.obs.errors" class="invalid-feedback">
-              <div *ngIf="f.obs.errors.required">Observação é obrigatória</div>
+            <div *ngIf="f.obs.errors.required">Observação é obrigatória</div>
           </div>
+        </div>
       </div>
-    </div>
 
       <div class="form-group">
-          <button class="btn btn-primary">Cadastrar</button>
-          <a routerLink="/tratamento/consultar" class="btn btn-link">Cancelar</a>
+        <button class="btn btn-primary">Cadastrar</button>
+        <a routerLink="/tratamento/consultar" class="btn btn-link">Cancelar</a>
       </div>
+    </div>
   </form>
 </div>

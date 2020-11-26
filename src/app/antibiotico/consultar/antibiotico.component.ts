@@ -7,6 +7,8 @@ import { Helper } from '@app/_helpers/helper';
 import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
 import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
+import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
@@ -26,6 +28,8 @@ export class ConsultarAntibioticoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private title: Title,
+    private ngxLoader: NgxUiLoaderService,
     private antibioticoService: AntibioticoService,
     private authenticationService: AuthenticationService,
     private modalService: NgbModal) {
@@ -33,8 +37,11 @@ export class ConsultarAntibioticoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ngxLoader.start();
+    this.title.setTitle('Antibióticos | GESCO ')
     this.consultaTodosAntibioticos();
     this.antibioticoForm = this.criaFormVazio();
+    this.ngxLoader.stop();
   }
 
   onSubmit(antibioticoForm: NgForm) {
@@ -50,6 +57,13 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
+
+            if(antibiotico.dosagem <= 0.9) {
+              antibiotico.dosagem = antibiotico.dosagem + "mg";
+            } else {
+              antibiotico.dosagem = antibiotico.dosagem + "g";
+            }
+
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
         }
@@ -64,6 +78,13 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
+            
+            if(antibiotico.dosagem <= 0.9) {
+              antibiotico.dosagem = antibiotico.dosagem + "mg";
+            } else {
+              antibiotico.dosagem = antibiotico.dosagem + "g";
+            }
+
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
         } else {
@@ -77,7 +98,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
     if (this.order === order) {
       this.reverse = !this.reverse;
     }
-
     this.order = order;
   }
 
@@ -89,7 +109,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
   ngForRendred() {
     this.removeDisplayNoneNaTabelaResultados();
-    if(this.verify === false) {
+    if (this.verify === false) {
       this.aplicaEventoDeClickConsultarRegistro();
     }
   }

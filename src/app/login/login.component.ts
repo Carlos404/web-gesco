@@ -4,9 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '@app/_services';
-import { Helper } from '@app/_helpers/helper';
 import { AppComponent } from '@app/app.component';
-import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { Title } from '@angular/platform-browser';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -20,6 +19,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private title: Title,
     private authenticationService: AuthenticationService,
     private appComponent: AppComponent
   ) {
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Entrar | GESCO')
     this.loginForm = this.formBuilder.group({
       usuario: ['', Validators.required],
       senha: ['', Validators.required]
@@ -48,14 +49,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.usuario.value, this.f.senha.value)
       .pipe(first())
       .subscribe(
-        data => {
+        () => {
           this.appComponent.colocaAcessosMenu();
           this.router.navigate([this.returnUrl]);
         },
         error => {
           switch (error.status) {
             case 404:
-              this.error = 'Usuário não encontrado';
+              this.error = 'Usuário ou senha incorretos';
               break;
             case 401:
               this.error = 'Usuário ou senha incorretos';

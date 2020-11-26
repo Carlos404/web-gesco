@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService, PacienteService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { Paciente } from '@app/_models';
+import { Title } from '@angular/platform-browser';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({ selector: 'app-paciente', templateUrl: 'paciente.component.html'})
 export class CadastrarPacienteComponent implements OnInit {
@@ -14,22 +16,38 @@ export class CadastrarPacienteComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
      private router: Router,
+     private title: Title,
      private paciente: PacienteService,
+     private ngxLoader: NgxUiLoaderService,
      private authenticationService: AuthenticationService) {
         Helper.validaSessaoUsuario(this.authenticationService, this.router);
     }
 
     ngOnInit() {
+        this.ngxLoader.start();
+        if(this.isEdicao() === undefined) {
+            this.title.setTitle('Cadastro Paciente | GESCO ');
+          }
+          else {
+            this.title.setTitle('Editar Paciente | GESCO');
+          }
         this.pacienteForm = this.isEdicao() ? this.criaFormEdicao(history.state.paciente) : this.criaFormVazio();
+        this.ngxLoader.stop();
     }
     onSubmit(pacienteForm: NgForm) {
+        this.ngxLoader.start();
         this.submitted = true;
-        if (this.isFormInvalido()) return;
-        if(this.isEdicao()) {
+
+        if (this.isFormInvalido()) {
+          return;
+        }
+
+        if (this.isEdicao()) {
             this.updatePaciente(pacienteForm);
         }else{
             this.addPaciente(pacienteForm);
         }
+        this.ngxLoader.stop();
     }
     updatePaciente(pacienteForm: NgForm) {
         this.paciente.updatePaciente(history.state.paciente.id, pacienteForm)
@@ -53,7 +71,7 @@ export class CadastrarPacienteComponent implements OnInit {
         return this.formBuilder.group({
             nome: [paciente.nome, Validators.required],
             dtNascimento: [paciente.dtNascimento, Validators.required],
-            sexo: [this.getSexo(paciente.sexo), Validators.required],
+            sexo: [paciente.sexo, Validators.required],
             registry: [paciente.registry, Validators.required],
         });
     }
@@ -65,10 +83,6 @@ export class CadastrarPacienteComponent implements OnInit {
             sexo: ['', Validators.required],
             registry: ['', Validators.required],
         });
-    }
-
-    getSexo(sexo: String){
-        return "masculino" == sexo.toLowerCase() ? "masculino" : "feminino"
     }
 
     isEdicao(){

@@ -1,6 +1,3 @@
-import { ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
-import { ItemMenu } from './item-menu';
-
 export class StatusTratamento{
 
     static StatusTratamento = {
