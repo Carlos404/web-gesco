@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         error => {
           switch (error.status) {
             case 404:
-              this.error = 'Usuário não encontrado';
+              this.error = 'Usuário ou senha incorretos';
               break;
             case 401:
               this.error = 'Usuário ou senha incorretos';

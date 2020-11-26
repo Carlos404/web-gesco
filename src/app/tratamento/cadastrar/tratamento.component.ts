@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConsultarPacienteComponent } from '@app/paciente/consultar/paciente.component';
 import { Helper } from '@app/_helpers/helper';
@@ -24,6 +25,7 @@ export class CadastrarTratamentoComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private title: Title,
         private authenticationService: AuthenticationService,
         private antibioticoService: AntibioticoService,
         private tratamento: TratamentoService,
@@ -33,6 +35,13 @@ export class CadastrarTratamentoComponent implements OnInit {
     }
 
     ngOnInit() {
+      if(this.isEdicao() === undefined) {
+        this.title.setTitle('Cadastro Tratamento | GESCO ')
+      }
+      else {
+        this.title.setTitle('Editar Tratamento | GESCO')
+      }
+
       if (this.isEdicao()){
         this.edicaoTratamento = true;
         this.tratamentoForm = this.criaFormEdicao(history.state.tratamento);

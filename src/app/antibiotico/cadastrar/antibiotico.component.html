@@ -38,7 +38,7 @@
         <div class="form-group col-md-3">
           <label class="font-weight-bold" for="dosagem">Dosagem</label>
 
-          <input type="number" placeholder="0,0 (g,mg)" onchange="setTwoNumberDecimal" min="0" max="1000" step="0.1"
+          <input type="number" placeholder="0,0 (g,mg)" min="0" max="1000" step="0.001"
             value="0.00" formControlName="dosagem" class="form-control inputs"
             [ngClass]="{ 'is-invalid': submitted && f.dosagem.errors }" />
           <div *ngIf="submitted && f.dosagem.errors" class="invalid-feedback">
