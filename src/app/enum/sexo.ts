@@ -1,8 +1,8 @@
 export class Sexo{
 
     static Sexo = {
-        MASCULINO :        {  id: 1, nome: 'Masculino'},
-        FEMININO :        {  id: 2, nome: 'Feminino'}
+        MASCULINO :        {  id: 0, nome: 'Masculino'},
+        FEMININO :        {  id: 1, nome: 'Feminino'}
     };
 
     static getSexo(nomeSexo){

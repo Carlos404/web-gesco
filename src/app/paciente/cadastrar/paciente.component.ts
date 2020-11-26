@@ -36,8 +36,12 @@ export class CadastrarPacienteComponent implements OnInit {
     }
     onSubmit(pacienteForm: NgForm) {
         this.submitted = true;
-        if (this.isFormInvalido()) return;
-        if(this.isEdicao()) {
+
+        if (this.isFormInvalido()) {
+          return;
+        }
+
+        if (this.isEdicao()) {
             this.updatePaciente(pacienteForm);
         }else{
             this.addPaciente(pacienteForm);
@@ -65,7 +69,7 @@ export class CadastrarPacienteComponent implements OnInit {
         return this.formBuilder.group({
             nome: [paciente.nome, Validators.required],
             dtNascimento: [paciente.dtNascimento, Validators.required],
-            sexo: [this.getSexo(paciente.sexo), Validators.required],
+            sexo: [paciente.sexo, Validators.required],
             registry: [paciente.registry, Validators.required],
         });
     }
@@ -77,10 +81,6 @@ export class CadastrarPacienteComponent implements OnInit {
             sexo: ['', Validators.required],
             registry: ['', Validators.required],
         });
-    }
-
-    getSexo(sexo: String){
-        return "masculino" == sexo.toLowerCase() ? "masculino" : "feminino"
     }
 
     isEdicao(){
