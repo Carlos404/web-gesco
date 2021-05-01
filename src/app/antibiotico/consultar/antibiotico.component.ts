@@ -13,7 +13,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 @Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
 
-  order: string = 'lote';
+  order: string = '';
+  selected: string;
   reverse: boolean = false;
   verify: boolean = false;
 
@@ -25,6 +26,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
   antibioticoForm: FormGroup;
   submitted = false;
 
+  public orderSelect;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -58,11 +60,11 @@ export class ConsultarAntibioticoComponent implements OnInit {
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
 
-            if(antibiotico.dosagem <= 0.9) {
-              antibiotico.dosagem = antibiotico.dosagem + "mg";
-            } else {
-              antibiotico.dosagem = antibiotico.dosagem + "g";
-            }
+            // if(antibiotico.dosagem <= 0.9) {
+            //   antibiotico.dosagem = antibiotico.dosagem + "mg";
+            // } else {
+            //   antibiotico.dosagem = antibiotico.dosagem + "g";
+            // }
 
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
@@ -79,11 +81,11 @@ export class ConsultarAntibioticoComponent implements OnInit {
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
             
-            if(antibiotico.dosagem <= 0.9) {
-              antibiotico.dosagem = antibiotico.dosagem + "mg";
-            } else {
-              antibiotico.dosagem = antibiotico.dosagem + "g";
-            }
+            // if(antibiotico.dosagem <= 0.9) {
+            //   antibiotico.dosagem = antibiotico.dosagem + "mg";
+            // } else {
+            //   antibiotico.dosagem = antibiotico.dosagem + "g";
+            // }
 
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
@@ -95,6 +97,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
   }
 
   setOrder(order) {
+    console.log(order)
     if (this.order === order) {
       this.reverse = !this.reverse;
     }

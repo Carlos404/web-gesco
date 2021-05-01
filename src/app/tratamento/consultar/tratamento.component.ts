@@ -45,8 +45,8 @@ export class ConsultarTratamentoComponent implements OnInit, AfterViewInit  {
     this.title.setTitle('Tratamentos | GESCO ');
     this.consultaTodosTratamentos();
     this.tratamentoForm = this.criaFormVazio();
-    this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;
-    this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.DESENVOLEDOR.id;
+    this.isMedico = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.MEDICO.id;
+    this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.id;
     this.ngxLoader.stop();
   }
 

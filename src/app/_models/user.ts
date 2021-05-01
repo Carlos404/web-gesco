@@ -2,7 +2,8 @@
     id: number;
     nameUser: string;
     senha: string;
-    tipoUser: number;
+    tipoFuncionario: number;
+    funcionario: any;
     nome?: string;
     cargo?: string;
     token?: string;

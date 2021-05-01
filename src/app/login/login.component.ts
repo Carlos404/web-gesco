@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.title.setTitle('Entrar | GESCO')
     this.loginForm = this.formBuilder.group({
-      usuario: ['', Validators.required],
+      login: ['', Validators.required],
       senha: ['', Validators.required]
     });
 
@@ -44,13 +45,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
-    this.authenticationService.login(this.f.usuario.value, this.f.senha.value)
+    this.authenticationService.login(this.f.login.value, this.f.senha.value)
       .pipe(first())
       .subscribe(
         () => {
-          this.appComponent.colocaAcessosMenu();
+          // this.appComponent.colocaAcessosMenu();
           this.router.navigate([this.returnUrl]);
         },
         error => {

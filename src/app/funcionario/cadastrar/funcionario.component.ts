@@ -36,7 +36,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
       else {
         this.title.setTitle('Editar Funcionário | GESCO')
       }
-      this.acessoDev = this.authenticationService.currentUserValue.tipoUser === 0;
+      this.acessoDev = this.authenticationService.currentUserValue.tipoFuncionario === 0;
       this.funcionarioForm = this.isEdicao() ? this.criaFormEdicao(history.state.funcionario) : this.criaFormVazio();
       this.ngxLoader.stop();
     }
