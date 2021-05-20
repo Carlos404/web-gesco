@@ -3,7 +3,7 @@ import { ItemMenu } from './item-menu';
 export class Cargo {
 
   static cargos = {
-    DESENVOLVEDOR: { id: 0, nome: 'DESENVOLVEDOR', acessos: Object.values(ItemMenu.itemMenu) },
+    DESENVOLVEDOR: { id: 6, nome: 'DESENVOLVEDOR', acessos: Object.values(ItemMenu.itemMenu) },
     MEDICO: { id: 1, nome: 'MEDICO', acessos: ItemMenu.itemMenu.TRATAMENTO },
     FARMACEUTICO: { id: 2, nome: 'FARMACEUTICO', acessos: [ItemMenu.itemMenu.ANTIBIOTICO, ItemMenu.itemMenu.TRATAMENTO] },
     INTERNACAO: { id: 3, nome: 'INTERNACAO', acessos: ItemMenu.itemMenu.PACIENTE },

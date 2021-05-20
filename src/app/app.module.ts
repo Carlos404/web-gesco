@@ -1,84 +1,84 @@
-﻿import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+﻿import { Paciente } from './_models';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-
+import { NgModule } from '@angular/core';
+import { Helper } from './_helpers/helper';
+import { OrderModule } from 'ngx-order-pipe';
+import { AppComponent } from './app.component';
+import { NgxUiLoaderModule } from "ngx-ui-loader"
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { Funcionario } from './_models/funcionario';
+import { Antibiotico } from './_models/antibiotico';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { ModalAviso } from './modals/modal-aviso.component';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CadastrarPacienteComponent } from './paciente/cadastrar/paciente.component';
 import { ConsultarPacienteComponent } from './paciente/consultar/paciente.component';
-import { Helper } from './_helpers/helper';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
-import { Paciente } from './_models';
-import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
-import { Antibiotico } from './_models/antibiotico';
-import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
+import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
+import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
 import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibiotico.component';
-import { ModalAviso } from './modals/modal-aviso.component';
-import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegistroFuncionario.component';
+import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
-import { Funcionario } from './_models/funcionario';
 import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe } from './_helpers/util.pipes';
-import { OrderModule } from 'ngx-order-pipe';
-import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
-import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
+import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxUiLoaderModule } from "ngx-ui-loader"
+import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
+import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegistroFuncionario.component';
 
 @NgModule({
     imports: [
+        NgbModule,
+        OrderModule,
+        FormsModule,
         BrowserModule,
-        ReactiveFormsModule,
+        NgSelectModule,
+        FilterPipeModule,
         HttpClientModule,
         AppRoutingModule,
-        OrderModule,
-        NgSelectModule,
-        FormsModule,
-        NgbModule,
-        NgxUiLoaderModule
+        NgxUiLoaderModule,
+        ReactiveFormsModule
     ],
     declarations: [
+        ModalAviso,
+        GetCargoPipe,
         AppComponent,
         HomeComponent,
         LoginComponent,
-        CadastrarFuncionarioComponent,
-        ConsultarFuncionarioComponent,
+        GetNomeSexoPipe,
+        ModalConsultaPaciente,
+        GetStatusTratamentoPipe,
+        ModalConsultaTratamento,
+        ModalConsultaAntibiotico,
+        ModalConsultaFuncionario,
         CadastrarPacienteComponent,
         ConsultarPacienteComponent,
         CadastrarTratamentoComponent,
         ConsultarTratamentoComponent,
-        ModalConsultaPaciente ,
+        CadastrarFuncionarioComponent,
+        ConsultarFuncionarioComponent,
         CadastrarAntibioticoComponent,
-        ConsultarAntibioticoComponent,
-        ModalConsultaAntibiotico,
-        ModalConsultaFuncionario,
-        ModalConsultaTratamento,
-        GetCargoPipe,
-        GetStatusTratamentoPipe,
-        GetNomeSexoPipe,
-        ModalAviso  ],
+        ConsultarAntibioticoComponent
+    ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         Helper,
+        Paciente,
+        ModalAviso,
+        Funcionario,
+        Antibiotico,
+        NgbActiveModal,
         ModalConsultaPaciente,
         ModalConsultaAntibiotico,
         ModalConsultaFuncionario,
         ModalConsultaTratamento,
-        CadastrarTratamentoComponent,
-        NgbActiveModal,
-        Funcionario,
-        Paciente,
-        Antibiotico,
-        ModalAviso,
+        CadastrarTratamentoComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'https://gesco-api.herokuapp.com/funcionarios';
+const apiUrl = 'https://gesco-api.herokuapp.com/api/funcionario';
 
 @Injectable({
   providedIn: 'root'

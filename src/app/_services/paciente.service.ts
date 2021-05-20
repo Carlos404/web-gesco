@@ -7,7 +7,7 @@ import { Paciente } from '@app/_models';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'https://gesco-api.herokuapp.com/pacientes';
+const apiUrl = 'https://gesco-api.herokuapp.com/api/paciente';
 
 @Injectable({
   providedIn: 'root'

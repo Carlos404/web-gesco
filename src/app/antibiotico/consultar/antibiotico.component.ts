@@ -9,10 +9,12 @@ import { Antibiotico } from '@app/_models/antibiotico';
 import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
 import { Title } from '@angular/platform-browser';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { FilterPipe } from 'ngx-filter-pipe';
 
 @Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
 
+  userFilter: any = { nome: '' };
   order: string = '';
   selected: string;
   reverse: boolean = false;
@@ -28,13 +30,15 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
   public orderSelect;
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
     private title: Title,
+    private router: Router,
+    private filterPipe: FilterPipe,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,
     private ngxLoader: NgxUiLoaderService,
     private antibioticoService: AntibioticoService,
     private authenticationService: AuthenticationService,
-    private modalService: NgbModal) {
+  ) {
     Helper.validaSessaoUsuario(this.authenticationService, this.router);
   }
 
@@ -80,7 +84,7 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
-            
+
             // if(antibiotico.dosagem <= 0.9) {
             //   antibiotico.dosagem = antibiotico.dosagem + "mg";
             // } else {
