@@ -21,9 +21,9 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
                 private modalService: NgbModal) { }
 
     ngOnInit() {
-      this.isMedico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.MEDICO.id;
-      this.isFarmaceutico = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.FARMACEUTICO.id;
-      this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoUser === Cargo.cargos.DESENVOLEDOR.id;
+      this.isMedico = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.MEDICO.id;
+      this.isFarmaceutico = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.FARMACEUTICO.id;
+      this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.id;
       this.tratamento = JSON.parse(this.jsonTratamento);
     }
 

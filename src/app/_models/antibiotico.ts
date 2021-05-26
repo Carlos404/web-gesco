@@ -1,10 +1,10 @@
 export class Antibiotico {
     id: number;
     nome: string;
+    nomeComercial: string;
     lote: string;
-    validade: Date;
-    dosagem: any;
-    aplicacao: string;
+    dataValidade: Date;
+    tipoAplicacao: string;
     idFuncionario: string;
     jsonAntibiotico: string;
     funcionario: string;

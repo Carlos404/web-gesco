@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
     }
 
     colocaAcessosMenu(){
-        this.acessos = Helper.getMenuAcessos(this.authenticationService.currentUserValue.tipoUser);
+        this.acessos = Helper.getMenuAcessos(this.authenticationService.currentUserValue.funcionario.tipoFuncionario);
     }
 
     logout() {

@@ -24,6 +24,7 @@
     "@ng-select/ng-select": "^5.0.8",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "ngx-filter-pipe": "^2.1.2",
     "ngx-order-pipe": "^2.1.1",
     "ngx-ui-loader": "^10.0.0",
     "rxjs": "^6.5.4",

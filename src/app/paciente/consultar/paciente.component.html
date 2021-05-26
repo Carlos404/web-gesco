@@ -20,14 +20,14 @@
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th (click)="setOrder('registry')" scope="col">Registro Atendimento
-                  <span *ngIf="order =='registry'">{{reverse ? '▲' : '▼'}}</span>  
+                <th (click)="setOrder('registro')" scope="col">Registro Atendimento
+                  <span *ngIf="order =='registro'">{{reverse ? '▲' : '▼'}}</span>  
                 </th>
                 <th (click)="setOrder('nome')" scope="col">Nome
                   <span *ngIf="order =='nome'">{{reverse ? '▲' : '▼'}}</span>  
                 </th>
-                <th (click)="setOrder('dtNascimento')" scope="col">Data Nascimento
-                  <span *ngIf="order =='dtNascimento'">{{reverse ? '▲' : '▼'}}</span>  
+                <th (click)="setOrder('dataNascimento')" scope="col">Data Nascimento
+                  <span *ngIf="order =='dataNascimento'">{{reverse ? '▲' : '▼'}}</span>  
                 </th>
                 <th (click)="setOrder('sexo')" scope="col">Sexo
                   <span *ngIf="order =='sexo'">{{reverse ? '▲' : '▼'}}</span>  
@@ -38,9 +38,9 @@
               <tr #resultadosPaciente *ngFor="let paciente of pacientes | orderBy: order: reverse;  let i = index"
                 attr.data-codigo-paciente="{{paciente.id}}" attr.data-json-paciente="{{paciente.jsonPaciente}}"
                 class="cursorPointer resultado">
-                <td>{{paciente.registry}}</td>
+                <td>{{paciente.registro}}</td>
                 <td>{{paciente.nome}}</td>
-                <td>{{paciente.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{paciente.dataNascimento | date: 'dd/MM/yyyy'}}</td>
                 <td>{{paciente.sexo | getNomeSexoPeloCodigo }}</td>
               </tr>
             </tbody>

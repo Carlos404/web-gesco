@@ -3,50 +3,61 @@
     <button class="btn btn-primary float-right col-1" routerLink="/antibiotico/cadastrar">Cadastrar</button>
   </div>
 
+
+
+
+  
+  <div class="row d-flex justify-content-end mt-5">
+    <select name="select" [(ngModel)]="orderSelect" (ngModelChange)="setOrder($event)">
+      <option value="" [(value)]="selected" disabled>Filtrar</option>
+      <option value="lote">Lote</option>
+      <option value="nome">Nome</option>
+      <option value="nomeComercial">Nome comercial</option>
+      <option value="dataValidade" selected>Validade</option>
+      <option value="tipoAplicacao">Aplicação</option>
+    </select>
+  </div>
   <div class="row">
     <form [formGroup]="antibioticoForm" (ngSubmit)="onSubmit(antibioticoForm.value)" class="w-100">
       <div class="card mt-4">
         <div class="card-body">
           <h2 class="mt-3">Consultar Antibiótico</h2>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" formControlName="nome" placeholder="Nome do antibiótico"
+            <input [(ngModel)]="userFilter.nome" type="text" class="form-control" formControlName="nome" placeholder="Nome do antibiótico"
               aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" id="button-addon2">Pesquisar</button>
-            </div>
           </div>
         </div>
         <div class="card-body d-none" id="resultado">
           <table class="table">
             <thead class="thead-light">
               <tr>
-                <th (click)="setOrder('lote')" scope="col">Lote
-                  <span *ngIf="order =='lote'">{{reverse ? '▲' : '▼'}}</span>
+                <th>Lote
+                  <span *ngIf="order =='lote'">▼</span>
                 </th>
-                <th (click)="setOrder('nome')" scope="col">Nome
-                  <span *ngIf="order =='nome'">{{reverse ? '▲' : '▼'}}</span>
+                <th>Nome
+                  <span *ngIf="order =='nome'">▼</span>
                 </th>
-                <th (click)="setOrder('validade')" scope="col">Validade
-                  <span *ngIf="order =='validade'">{{reverse ? '▲' : '▼'}}</span>
+                <th>Nome Comercial
+                  <span *ngIf="order =='nomeComercial'">▼</span>
                 </th>
-                <th (click)="setOrder('dosagem')" scope="col">Dosagem
-                  <span *ngIf="order =='dosagem'">{{reverse ? '▲' : '▼'}}</span>
+                <th>Validade
+                  <span *ngIf="order =='dataValidade'">▼</span>
                 </th>
-                <th (click)="setOrder('aplicacao')" scope="col">Aplicação
-                  <span *ngIf="order =='aplicacao'">{{reverse ? '▲' : '▼'}}</span>
+                <th >Aplicação
+                  <span *ngIf="order =='tipoAplicacao'">▼</span>
                 </th>
               </tr>
             </thead>
             <tbody class="tbody-resultados">
               <tr #resultadosAntibiotico
-                *ngFor="let antibiotico of antibioticos | orderBy: order: reverse; let i = index"
+                *ngFor="let antibiotico of antibioticos | filterBy: userFilter | orderBy: order: reverse; let i = index"
                 attr.data-codigo-antibiotico="{{antibiotico.id}}"
                 attr.data-json-antibiotico="{{antibiotico.jsonAntibiotico}}" class="cursorPointer resultado">
                 <td>{{antibiotico.lote}}</td>
                 <td>{{antibiotico.nome}}</td>
-                <td>{{antibiotico.validade | date: 'dd/MM/yyyy'}}</td>
-                <td>{{antibiotico.dosagem}}</td>
-                <td>{{antibiotico.aplicacao}}</td>
+                <td>{{antibiotico.nomeComercial}}</td>
+                <td>{{antibiotico.dataValidade | date: 'dd/MM/yyyy'}}</td>
+                <td>{{antibiotico.tipoAplicacao | getNomeAplicacaoPeloCodigo}}</td>
               </tr>
             </tbody>
           </table>

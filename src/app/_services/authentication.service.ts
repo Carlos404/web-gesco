@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { User } from '@app/_models';
 
-const apiUrl = '//gesco-api.herokuapp.com/login';
+const apiUrl = 'https://gesco-api.herokuapp.com/api/login';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -21,8 +21,8 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(usuario: string, senha: string) {
-        return this.http.get<any>(`${apiUrl}?pass=${senha}&user=${usuario}`)
+    login(login: string, senha: string) {
+        return this.http.post<any>(`${apiUrl}`, { login, senha })
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
