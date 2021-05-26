@@ -12,16 +12,16 @@ import { Aplicacao } from '@app/enum/aplicacao';
 @Component({ selector: 'app-antibiotico', templateUrl: 'antibiotico.component.html'})
 export class CadastrarAntibioticoComponent implements OnInit {
 
-    aplicacao = [
-        {id: 1, nome: '	INTRAMUSCULAR(IM)'},
-        {id: 2, nome: 'ENDOVENOSA(EV) | INTRAMUSCULAR(IM)'},
-        {id: 3, nome: 'COMPRIMIDO(CP)'}
-    ];
+    // aplicacao = [
+    //     {id: 1, nome: '	INTRAMUSCULAR(IM)'},
+    //     {id: 2, nome: 'ENDOVENOSA(EV) | INTRAMUSCULAR(IM)'},
+    //     {id: 3, nome: 'COMPRIMIDO(CP)'}
+    // ];
 
   antibioticoForm: FormGroup;
   loading = false;
   submitted = false;
-  aplicacaoSelecionada = [];
+//   aplicacaoSelecionada = [];
 
   
 
@@ -86,9 +86,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
             nomeComercial: [antibiotico.nome, Validators.required],
             dataValidade: [antibiotico.dataValidade, Validators.required],
             // dosagem: [antibiotico.dosagem, Validators.required],
-            tipoAplicacao: [this.aplicacao.map(function(id){
-                return id;
-            }), Validators.required],
+            tipoAplicacao: [antibiotico.tipoAplicacao, Validators.required],
             funcionario: {id: antibiotico.idFuncionario}
         }
         );

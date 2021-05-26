@@ -57,7 +57,7 @@
                 <td>{{antibiotico.nome}}</td>
                 <td>{{antibiotico.nomeComercial}}</td>
                 <td>{{antibiotico.dataValidade | date: 'dd/MM/yyyy'}}</td>
-                <td>{{antibiotico.tipoAplicacao}}</td>
+                <td>{{antibiotico.tipoAplicacao | getNomeAplicacaoPeloCodigo}}</td>
               </tr>
             </tbody>
           </table>

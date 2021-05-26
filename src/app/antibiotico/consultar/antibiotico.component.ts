@@ -101,7 +101,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
   }
 
   setOrder(order) {
-    console.log(order)
     if (this.order === order) {
       this.reverse = !this.reverse;
     }

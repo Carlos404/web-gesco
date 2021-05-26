@@ -25,7 +25,7 @@ import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibioti
 import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
-import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe } from './_helpers/util.pipes';
+import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe, GetNomeAplicacaoPipe } from './_helpers/util.pipes';
 import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
 import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
@@ -51,6 +51,7 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
         HomeComponent,
         LoginComponent,
         GetNomeSexoPipe,
+        GetNomeAplicacaoPipe,
         ModalConsultaPaciente,
         GetStatusTratamentoPipe,
         ModalConsultaTratamento,

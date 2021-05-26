@@ -50,21 +50,11 @@
         <div class="form-group col-md-3">
           <label class="font-weight-bold inputAplicacao" for="tipoAplicacao">Aplicação</label>
           <select formControlName="tipoAplicacao" class="form-control inputAplicacao">
-            <option value="1">INTRAMUSCULAR</option>
-            <option value="2">ENDOVENOSA - INTRAMUSCULAR</option>
-            <option value="3">COMPRIMIDO</option>
+            <option value="1">ENDOVENOSA</option>
+            <option value="2">INTRAMUSCULAR</option>
+            <option value="3">IM - CP</option>
+            <option value="4">COMPRIMIDO</option>
           </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <label class="font-weight-bold inputAplicacao" for="tipoAplicacao">Aplicação</label>
-          <input type="text" formControlName="tipoAplicacao" class="form-control inputAplicacao"
-            [ngClass]="{ 'is-invalid': submitted && f.tipoAplicacao.errors }" />
-          <div *ngIf="submitted && f.tipoAplicacao.errors" class="invalid-feedback">
-            <div *ngIf="f.tipoAplicacao.errors.required">Aplicação é obrigatória</div>
-          </div>
         </div>
       </div>
 
