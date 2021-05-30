@@ -22,33 +22,25 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th (click)="setOrder('paciente')" scope="col">Paciente
-                                    <span *ngIf="order =='paciente'">{{reverse ? '▲' : '▼'}}</span>
+                                <th (click)="setOrder('registroPaciente')" scope="col">Paciente
+                                    <span *ngIf="order =='registroPaciente'">{{reverse ? '▲' : '▼'}}</span>
                                 </th>
-                                <th (click)="setOrder('diagnostico')" scope="col">Diagnostico
-                                    <span *ngIf="order =='diagnostico'">{{reverse ? '▲' : '▼'}}</span>
+                                <th (click)="setOrder('nomePaciente')" scope="col">Paciente
+                                    <span *ngIf="order =='nomePaciente'">{{reverse ? '▲' : '▼'}}</span>
                                 </th>
-                                <th (click)="setOrder('inicio_tratamento')" scope="col">Início Tratamento
-                                    <span *ngIf="order =='inicio_tratamento'">{{reverse ? '▲' : '▼'}}</span>
-                                </th>
-                                <th (click)="setOrder('fim_tratamento')" scope="col">Fim Tratamento
-                                    <span *ngIf="order =='fim_tratamento'">{{reverse ? '▲' : '▼'}}</span>
-                                </th>
-                                <th (click)="setOrder('statusTratamento')" scope="col">Status
-                                    <span *ngIf="order =='statusTratamento'">{{reverse ? '▲' : '▼'}}</span>
+                                <th (click)="setOrder('descDiagnostico')" scope="col">Diagnostico
+                                    <span *ngIf="order =='descDiagnostico'">{{reverse ? '▲' : '▼'}}</span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="tbody-resultados">
                             <tr #resultadosTratamento *ngFor="let tratamento of tratamentos | orderBy: order: reverse; "
-                                attr.data-codigo-paciente="{{tratamento.id}}"
+                                attr.data-codigo-paciente="{{tratamento.idTratamento}}"
                                 attr.data-json-tratamento="{{tratamento.jsonTratamento}}"
                                 class="cursorPointer resultado">
-                                <td>{{tratamento.paciente}}</td>
-                                <td>{{tratamento.diagnostico}}</td>
-                                <td>{{tratamento.inicio_tratamento | date: 'dd/MM/yyyy'}}</td>
-                                <td>{{tratamento.fim_tratamento | date: 'dd/MM/yyyy'}}</td>
-                                <td>{{tratamento.statusTratamento | getStatusTratamentoPeloCodigo}}</td>
+                                <td>{{tratamento.registroPaciente}}</td>
+                                <td>{{tratamento.nomePaciente}}</td>
+                                <td>{{tratamento.descDiagnostico}}</td>
                             </tr>
                         </tbody>
                     </table>

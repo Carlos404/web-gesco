@@ -32,7 +32,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
   constructor(
     private title: Title,
     private router: Router,
-    private filterPipe: FilterPipe,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private ngxLoader: NgxUiLoaderService,
@@ -63,13 +62,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
-
-            // if(antibiotico.dosagem <= 0.9) {
-            //   antibiotico.dosagem = antibiotico.dosagem + "mg";
-            // } else {
-            //   antibiotico.dosagem = antibiotico.dosagem + "g";
-            // }
-
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
         }
@@ -84,13 +76,6 @@ export class ConsultarAntibioticoComponent implements OnInit {
 
           this.antibioticos.forEach(antibiotico => {
             this.antibiotico = antibiotico;
-
-            // if(antibiotico.dosagem <= 0.9) {
-            //   antibiotico.dosagem = antibiotico.dosagem + "mg";
-            // } else {
-            //   antibiotico.dosagem = antibiotico.dosagem + "g";
-            // }
-
             this.antibiotico.jsonAntibiotico = JSON.stringify(antibiotico);
           });
         } else {

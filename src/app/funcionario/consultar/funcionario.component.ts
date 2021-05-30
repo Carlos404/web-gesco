@@ -94,7 +94,7 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   removeDesenvolvedoresDaLista(funcionario: Funcionario) {
     const cargoDesenvolvedor = Cargo.cargos.DESENVOLVEDOR.id;
 
-    if (this.authenticationService.currentUserValue.tipoFuncionario === cargoDesenvolvedor) {
+    if (this.authenticationService.currentUserValue.funcionario.tipoFuncionario === cargoDesenvolvedor) {
       return true;
     }
     if (funcionario.tipoFuncionario.toString() !== cargoDesenvolvedor.toString()) {

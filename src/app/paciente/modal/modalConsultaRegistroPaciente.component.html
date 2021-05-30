@@ -12,7 +12,7 @@
       </div>
       <div class="form-group col-md-5">
         <label class="font-weight-bold" for="nome">Nome Completo</label>
-        <span class="d-block">{{paciente.nome}}</span>
+        <span class="d-block">{{paciente.nomePaciente}}</span>
       </div>
     </div>
     <div class="form-row">
@@ -29,4 +29,5 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" routerLink="/paciente/cadastrar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>
+  <button type="button" class="btn btn-info" routerLink="/tratamento/cadastrar" (click)="activeModal.close('Close click'); redirecionaTelaEdicaoTratamento()">Tratamento</button>
 </div>

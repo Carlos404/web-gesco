@@ -8,11 +8,11 @@
   <div class="form-row">
     <div class="form-group col-md-5">
       <label class="font-weight-bold" for="nome">Paciente</label>
-      <span class="d-block">{{tratamento.paciente}}</span>
+      <span class="d-block">{{tratamento.nomePaciente}}</span>
     </div>
     <div class="form-group col-md-5">
       <label class="font-weight-bold" for="nome">Diagnóstico</label>
-      <span class="d-block">{{tratamento.diagnostico}}</span>
+      <span class="d-block">{{tratamento.descDiagnostico}}</span>
     </div>
   </div>
   <div class="form-row">
@@ -51,7 +51,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-primary" routerLink="/antibiotico/consultar" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()" *ngIf="isMedico || isDesenvolvedor">Editar</button>
-    <ng-container *ngIf="isFarmaceutico || isDesenvolvedor && tratamento.statusTratamento == 0">
+    <ng-container *ngIf="isFarmaceutico || isDesenvolvedor">
       <button type="button" class="btn btn-success" (click)="activeModal.close('Close click'); open(true)">Aprovar</button>
       <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click'); open(false)">Recusar</button>
     </ng-container>

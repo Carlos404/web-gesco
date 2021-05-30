@@ -25,6 +25,9 @@ import { CadastrarAntibioticoComponent } from './antibiotico/cadastrar/antibioti
 import { ConsultarAntibioticoComponent } from './antibiotico/consultar/antibiotico.component';
 import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionario.component';
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
+import { CadastrarPrescricaoComponent } from './prescricao/cadastrar/prescricao.component';
+import { ConsultarPrescricaoComponent } from './prescricao/consultar/prescricao.component';
+
 import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe, GetNomeAplicacaoPipe } from './_helpers/util.pipes';
 import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
@@ -64,7 +67,9 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
         CadastrarFuncionarioComponent,
         ConsultarFuncionarioComponent,
         CadastrarAntibioticoComponent,
-        ConsultarAntibioticoComponent
+        ConsultarAntibioticoComponent,
+        ConsultarPrescricaoComponent,
+        CadastrarPrescricaoComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'https://gesco-api.herokuapp.com/tratamentos';
+const apiUrl = 'https://gesco-api.herokuapp.com/api/tratamento';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class TratamentoService {
   }
 
   getTratamento(id: string): Observable<Tratamento[]> {
-    const url = `${apiUrl}/${id}`;
+    const url = `${apiUrl}/?paciente=${id}`;
     return this.http.get<Tratamento[]>(url).pipe(
       catchError(this.handleError<Tratamento[]>(`getTratamento id=${id}`))
     );

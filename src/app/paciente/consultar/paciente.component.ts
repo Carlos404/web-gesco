@@ -18,7 +18,7 @@ export class ConsultarPacienteComponent implements OnInit {
 
   @ViewChildren('resultadosPaciente') things: QueryList<any>;
 
-  paciente: Paciente = { id: null, nome: '', sexo: '', dtNascimento: null, registry: null, jsonPaciente: '' };
+  paciente: Paciente = { id: null, nomePaciente: '', sexo: '', dtNascimento: null, registry: null, jsonPaciente: '' };
   pacientes: Paciente[];
 
   pacienteForm: FormGroup;

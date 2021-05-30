@@ -12,6 +12,8 @@ import { ConsultarFuncionarioComponent } from './funcionario/consultar/funcionar
 import { CadastrarFuncionarioComponent } from './funcionario/cadastrar/funcionario.component';
 import { ConsultarTratamentoComponent } from './tratamento/consultar/tratamento.component';
 import { CadastrarTratamentoComponent } from './tratamento/cadastrar/tratamento.component';
+import { CadastrarPrescricaoComponent } from './prescricao/cadastrar/prescricao.component';
+import { ConsultarPrescricaoComponent } from './prescricao/consultar/prescricao.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -24,7 +26,9 @@ const routes: Routes = [
     { path: 'antibiotico/cadastrar', component: CadastrarAntibioticoComponent },
     { path: 'tratamento/consultar', component: ConsultarTratamentoComponent },
     { path: 'tratamento/cadastrar', component: CadastrarTratamentoComponent },
-
+    { path: 'prescricao/cadastrar', component: CadastrarPrescricaoComponent },
+    { path: 'prescricao/consultar', component: ConsultarPrescricaoComponent },
+    
     { path: '**', redirectTo: '' }
 ];
 

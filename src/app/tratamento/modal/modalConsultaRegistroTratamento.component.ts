@@ -21,13 +21,14 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
                 private modalService: NgbModal) { }
 
     ngOnInit() {
-      this.isMedico = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.MEDICO.id;
-      this.isFarmaceutico = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.FARMACEUTICO.id;
-      this.isDesenvolvedor = this.authenticationService.currentUserValue.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.id;
+      this.isMedico = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.MEDICO.nome;
+      this.isFarmaceutico = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.FARMACEUTICO.nome;
+      this.isDesenvolvedor = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.nome;
       this.tratamento = JSON.parse(this.jsonTratamento);
     }
 
     redirecionaTelaEdicao(){
+      console.log(this.tratamento)
       this.router.navigate(['tratamento/cadastrar'], {state: {tratamento: this.tratamento}});
     }
 

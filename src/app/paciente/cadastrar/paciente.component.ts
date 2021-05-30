@@ -69,7 +69,7 @@ export class CadastrarPacienteComponent implements OnInit {
 
     criaFormEdicao(paciente: Paciente){
         return this.formBuilder.group({
-            nome: [paciente.nome, Validators.required],
+            nome: [paciente.nomePaciente, Validators.required],
             dtNascimento: [paciente.dtNascimento, Validators.required],
             sexo: [paciente.sexo, Validators.required],
             registry: [paciente.registry, Validators.required],
