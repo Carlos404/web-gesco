@@ -6,9 +6,9 @@ import { AuthenticationService } from '@app/_services';
 import { Helper } from '@app/_helpers/helper';
 import { AntibioticoService } from '@app/_services/antibiotico.service';
 import { Antibiotico } from '@app/_models/antibiotico';
-import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Title } from '@angular/platform-browser';
+import { ModalConsultaAntibiotico } from '../modal/modalConsultaRegistroAntibiotico.component';
 
 @Component({ selector: 'app-antibiotico', templateUrl: './antibiotico.component.html' })
 export class ConsultarAntibioticoComponent implements OnInit {
