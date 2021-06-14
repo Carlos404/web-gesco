@@ -5,7 +5,7 @@
     crmOuCrf: string;
     dtNascimento: Date;
     hospital: string;
-    nameUser: string;
+    login: string;
     senha: string;
     tipoFuncionario: string;
     jsonFuncionario: string;

@@ -76,23 +76,21 @@ export class CadastrarFuncionarioComponent implements OnInit {
           dtNascimento: [funcionario.dtNascimento, Validators.required],
           sexo: [funcionario.sexo, Validators.required],
           tipoFuncionario: [funcionario.tipoFuncionario, Validators.required],
-          nameUser: [funcionario.nameUser, Validators.required],
+          login: [funcionario.login, Validators.required],
           senha: [funcionario.senha, Validators.required],
           crmOuCrf: [funcionario.crmOuCrf, Validators.required],
-          hospital: [{id: this.authenticationService.currentUserValue.hospital}, Validators.required]
+          hospital: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}, Validators.required]
       });
     }
 
   criaFormVazio(){
       return this.formBuilder.group({
         nome: ['', Validators.required],
-        dtNascimento: ['', Validators.required],
-        sexo: ['', Validators.required],
         tipoFuncionario: ['', Validators.required],
-        nameUser: ['', Validators.required],
+        login: ['', Validators.required],
         senha: ['', Validators.required],
-        crmOuCrf: ['', Validators.required],
-        hospital: [{id: this.authenticationService.currentUserValue.hospital}, Validators.required]
+        conselho: [this.authenticationService.currentUserValue.funcionario.conselho, Validators.required],
+        hospial: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}, Validators.required]
       });
   }
     isEdicao(){

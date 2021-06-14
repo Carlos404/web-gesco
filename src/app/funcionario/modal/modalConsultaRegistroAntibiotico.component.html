@@ -7,35 +7,19 @@
 <div class="modal-body">
     <div class="form-row">
       <div class="form-group col-md-5">
-        <label class="font-weight-bold" for="nome">Nome</label>
+        <label class="font-weight-bold" for="nome">Funcionário</label>
         <span class="d-block">{{funcionario.nome}}</span>
       </div>
       <div class="form-group col-md-5">
-        <label class="font-weight-bold" for="nome">Data de nascimento</label>
-        <span class="d-block">{{funcionario.dtNascimento}}</span>
+        <label class="font-weight-bold" for="nome">Usuário</label>
+        <span class="d-block">{{funcionario.login}}</span>
       </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-5">
-            <label class="font-weight-bold" for="sexo">Sexo</label>
-            <span class="d-block">{{funcionario.sexo}}</span>
-        </div>
-
-        <div class="form-group col-md-5">
-            <label class="font-weight-bold" for="dataNascimento">Tipo de Funcionário</label>
+            <label class="font-weight-bold" for="sexo">Ocupação</label>
             <span class="d-block">{{funcionario.tipoFuncionario | getNomeCargoPeloId}}</span>
         </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-5">
-          <label class="font-weight-bold" for="dataNascimento">Nome de usuário</label>
-          <span class="d-block">{{funcionario.nameUser}}</span>
-      </div>
-      <div class="form-group col-md-5">
-        <label class="font-weight-bold" for="dataNascimento">CRM ou CRF</label>
-        <span class="d-block">{{funcionario.crmOuCrf}}</span>
-    </div>
-  </div>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Editar</button>

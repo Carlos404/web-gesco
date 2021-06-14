@@ -13,6 +13,7 @@ export class CadastrarPacienteComponent implements OnInit {
   pacienteForm: FormGroup;
   loading = false;
   submitted = false;
+  acessoDev = false;
 
   constructor(private formBuilder: FormBuilder,
      private router: Router,
@@ -27,10 +28,11 @@ export class CadastrarPacienteComponent implements OnInit {
         this.ngxLoader.start();
         if(this.isEdicao() === undefined) {
             this.title.setTitle('Cadastro Paciente | GESCO ');
-          }
-          else {
+        }
+        else {
             this.title.setTitle('Editar Paciente | GESCO');
-          }
+        }
+        this.acessoDev = this.authenticationService.currentUserValue.tipoFuncionario === 0;
         this.pacienteForm = this.isEdicao() ? this.criaFormEdicao(history.state.paciente) : this.criaFormVazio();
         this.ngxLoader.stop();
     }
@@ -69,19 +71,21 @@ export class CadastrarPacienteComponent implements OnInit {
 
     criaFormEdicao(paciente: Paciente){
         return this.formBuilder.group({
-            nome: [paciente.nomePaciente, Validators.required],
-            dtNascimento: [paciente.dtNascimento, Validators.required],
+            nome: [paciente.nome, Validators.required],
+            dataNascimento: [paciente.dataNascimento, Validators.required],
             sexo: [paciente.sexo, Validators.required],
-            registry: [paciente.registry, Validators.required],
+            registro: [paciente.registro, Validators.required],
+            hospital: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}]
         });
     }
 
     criaFormVazio(){
         return this.formBuilder.group({
             nome: ['', Validators.required],
-            dtNascimento: ['', Validators.required],
+            dataNascimento: ['', Validators.required],
             sexo: ['', Validators.required],
-            registry: ['', Validators.required],
+            registro: ['', Validators.required],
+            hospital: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}]
         });
     }
 

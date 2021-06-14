@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './modalConsultaRegistroPaciente.component.html'
   })
   export class ModalConsultaPaciente {
-    paciente: Paciente = { id: null, nomePaciente: '', sexo: '', dtNascimento: null , registry: null, jsonPaciente:'' };
+    paciente: Paciente = { id: null, nome: '', sexo: '', dataNascimento: null , registro: null, hospital: '', jsonPaciente:'' };
     jsonPaciente: string;
 
     constructor(public activeModal: NgbActiveModal, private router: Router) {

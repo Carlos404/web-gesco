@@ -121,7 +121,7 @@ export class CadastrarTratamentoComponent implements OnInit {
 
     instanciaModal.result.then((jsonPaciente) => {
       const paciente = JSON.parse(jsonPaciente);
-      this.tratamentoForm.get('nomePaciente').setValue(paciente.nome);
+      this.tratamentoForm.get('nome').setValue(paciente.nome);
       this.tratamentoForm.get('paciente').setValue({ id: paciente.id });
     });
   }

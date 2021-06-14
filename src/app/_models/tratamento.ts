@@ -9,7 +9,7 @@ export class Tratamento {
   antibioticos?: any;
   antibioticosId?: any;
   pacienteId?: string;
-  nomePaciente?: any;
+  nome?: any;
   statusTratamento?: any;
   jsonTratamento?: string;
   medico?: string;

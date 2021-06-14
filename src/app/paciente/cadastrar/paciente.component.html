@@ -5,10 +5,10 @@
       <div class="form-row formInputs">
         <div class="form-group col-md-3">
           <label class="font-weight-bold titleGrid" for="lote">Registro Atendimento</label>
-          <input type="text" formControlName="registry" class="form-control inputs"
-            [ngClass]="{ 'is-invalid': submitted && f.registry.errors }" />
-          <div *ngIf="submitted && f.registry.errors" class="invalid-feedback">
-            <div *ngIf="f.registry.errors.required">Registro é obrigatório</div>
+          <input type="text" formControlName="registro" class="form-control inputs"
+            [ngClass]="{ 'is-invalid': submitted && f.registro.errors }" />
+          <div *ngIf="submitted && f.registro.errors" class="invalid-feedback">
+            <div *ngIf="f.registro.errors.required">Registro é obrigatório</div>
           </div>
         </div>
 
@@ -27,10 +27,10 @@
       <div class="form-row formInputs">
         <div class="form-group col-md-3">
           <label class="font-weight-bold" for="lote">Data Nascimento</label>
-          <input type="date" formControlName="dtNascimento" class="form-control inputs"
-          [ngClass]="{ 'is-invalid': submitted && f.dtNascimento.errors }" />
-        <div *ngIf="submitted && f.dtNascimento.errors" class="invalid-feedback">
-          <div *ngIf="f.dtNascimento.errors.required">Data de nascimento é obrigatório</div>
+          <input type="date" formControlName="dataNascimento" class="form-control inputs"
+          [ngClass]="{ 'is-invalid': submitted && f.dataNascimento.errors }" />
+        <div *ngIf="submitted && f.dataNascimento.errors" class="invalid-feedback">
+          <div *ngIf="f.dataNascimento.errors.required">Data de nascimento é obrigatório</div>
           </div>
         </div>
 
@@ -40,8 +40,8 @@
           <select formControlName="sexo" name="sexo" class="form-control inputs"
           [ngClass]="{ 'is-invalid': submitted && f.sexo.errors }">
           <option value="" disabled>Selecione</option>
-          <option value="0">Feminino</option>
-          <option value="1">Masculino</option>
+          <option value="false">Feminino</option>
+          <option value="true">Masculino</option>
         </select>
         <div *ngIf="submitted && f.sexo.errors" class="invalid-feedback">
           <div *ngIf="f.sexo.errors.required">Sexo é obrigatório</div>

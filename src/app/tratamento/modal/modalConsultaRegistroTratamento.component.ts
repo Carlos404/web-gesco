@@ -21,10 +21,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
                 private modalService: NgbModal) { }
 
     ngOnInit() {
+
       this.isMedico = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.MEDICO.nome;
       this.isFarmaceutico = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.FARMACEUTICO.nome;
       this.isDesenvolvedor = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.nome;
       this.tratamento = JSON.parse(this.jsonTratamento);
+      console.log(this.tratamento)
     }
 
     redirecionaTelaEdicao(){

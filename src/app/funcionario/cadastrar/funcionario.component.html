@@ -13,67 +13,31 @@
         </div>
 
         <div class="form-group col-md-3">
-          <label class="font-weight-bold" for="nome">Data Nascimento</label>
-
-          <input type="date" formControlName="dtNascimento" class="form-control inputs"
-            [ngClass]="{ 'is-invalid': submitted && f.dtNascimento.errors }" />
-          <div *ngIf="submitted && f.dtNascimento.errors" class="invalid-feedback">
-            <div *ngIf="f.dtNascimento.errors.required">Data de nascimento é obrigatório</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-row formInputs">
-        <div class="form-group col-md-3">
-          <label class="font-weight-bold" for="nome">Sexo</label>
-
-          <select formControlName="sexo" name="sexo" class="form-control inputs"
-            [ngClass]="{ 'is-invalid': submitted && f.sexo.errors }">
-            <option value="" disabled>Selecione</option>
-            <option value="1">Masculino</option>
-            <option value="2">Feminino</option>
-          </select>
-          <div *ngIf="submitted && f.sexo.errors" class="invalid-feedback">
-            <div *ngIf="f.sexo.errors.required">Sexo é obrigatório</div>
-          </div>
-        </div>
-
-        <div class="form-group col-md-3">
           <label class="font-weight-bold" for="dosagem">Tipo Funcionário</label>
 
           <select formControlName="tipoFuncionario" name="tipoFuncionario" class="form-control inputs"
             [ngClass]="{ 'is-invalid': submitted && f.tipoFuncionario.errors }">
             <option value="" disabled>Selecione</option>
             <option *ngIf="acessoDev" value="0">Desenvolvedor</option>
-            <option value="1">Médico</option>
-            <option value="2">Farmacêutico</option>
-            <option value="3">Internação</option>
-            <option value="4">Farmácia</option>
-            <option value="5">Administrador</option>
+            <option value="0">Médico</option>
+            <option value="1">Farmacêutico</option>
+            <option value="2">Internação</option>
+            <option value="3">Farmácia</option>
+            <option value="4">Administrador</option>
           </select>
           <div *ngIf="submitted && f.tipoFuncionario.errors" class="invalid-feedback">
             <div *ngIf="f.tipoFuncionario.errors.required">Tipo funcionário é obrigatório</div>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <label class="font-weight-bold inputAplicacao" for="aplicacao">CRM / CPF</label>
-
-          <input type="text" formControlName="crmOuCrf" class="form-control inputAplicacao"
-            [ngClass]="{ 'is-invalid': submitted && f.crmOuCrf.errors }" />
-          <div *ngIf="submitted && f.crmOuCrf.errors" class="invalid-feedback">
-            <div *ngIf="f.crmOuCrf.errors.required">CRM / CPF é obrigatório</div>
-          </div>
-        </div>
-      </div>
+     
       <div class="form-row formInputs">
         <div class="form-group col-md-3">
           <label class="font-weight-bold" for="lote">Usuário</label>
-          <input type="text" formControlName="nameUser" class="form-control inputs"
-            [ngClass]="{ 'is-invalid': submitted && f.nameUser.errors }" />
-          <div *ngIf="submitted && f.nameUser.errors" class="invalid-feedback">
-            <div *ngIf="f.nameUser.errors.required">Usuário é obrigatório</div>
+          <input type="text" formControlName="login" class="form-control inputs"
+            [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
+          <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+            <div *ngIf="f.login.errors.required">Usuário é obrigatório</div>
           </div>
         </div>
 

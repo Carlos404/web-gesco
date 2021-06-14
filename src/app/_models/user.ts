@@ -1,6 +1,6 @@
 ﻿export class User {
     id: number;
-    nameUser: string;
+    login: string;
     senha: string;
     tipoFuncionario: number;
     funcionario: any;
@@ -8,4 +8,5 @@
     cargo?: string;
     token?: string;
     hospital?: number;
+    conselho?: number;
 }
