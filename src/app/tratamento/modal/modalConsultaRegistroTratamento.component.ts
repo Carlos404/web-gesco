@@ -26,11 +26,9 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       this.isFarmaceutico = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.FARMACEUTICO.nome;
       this.isDesenvolvedor = this.authenticationService.currentUserValue.funcionario.tipoFuncionario === Cargo.cargos.DESENVOLVEDOR.nome;
       this.tratamento = JSON.parse(this.jsonTratamento);
-      console.log(this.tratamento)
     }
 
     redirecionaTelaEdicao(){
-      console.log(this.tratamento)
       this.router.navigate(['tratamento/cadastrar'], {state: {tratamento: this.tratamento}});
     }
 

@@ -32,7 +32,8 @@ import { GetCargoPipe, GetStatusTratamentoPipe, GetNomeSexoPipe, GetNomeAplicaca
 import { ModalConsultaPaciente } from './paciente/modal/modalConsultaRegistroPaciente.component';
 import { ModalConsultaTratamento } from './tratamento/modal/modalConsultaRegistroTratamento.component';
 import { ModalConsultaAntibiotico } from './antibiotico/modal/modalConsultaRegistroAntibiotico.component';
-import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegistroFuncionario.component';
+import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegistroFuncionario.component';;
+import { ModalRecusaComponent } from './prescricao/modal/modal-recusa/modal-recusa.component'
 
 @NgModule({
     imports: [
@@ -69,7 +70,8 @@ import { ModalConsultaFuncionario } from './funcionario/modal/modalConsultaRegis
         CadastrarAntibioticoComponent,
         ConsultarAntibioticoComponent,
         ConsultarPrescricaoComponent,
-        CadastrarPrescricaoComponent
+        CadastrarPrescricaoComponent,
+        ModalRecusaComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

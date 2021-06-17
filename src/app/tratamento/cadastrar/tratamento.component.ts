@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConsultarPacienteComponent } from '@app/paciente/consultar/paciente.component';
 import { Helper } from '@app/_helpers/helper';
-import { Tratamento } from '@app/_models/Tratamento';
 import { AuthenticationService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Antibiotico } from './../../_models/antibiotico';
 import { AntibioticoService } from './../../_services/antibiotico.service';
 import { TratamentoService } from './../../_services/tratamento.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { PrescricaoService } from '@app/_services/prescricao.service';
 
 @Component({ selector: 'app-cadastro-tratamento', templateUrl: 'tratamento.component.html' })
 export class CadastrarTratamentoComponent implements OnInit {
 
-  tratamentoForm: FormGroup;
+  @ViewChildren('resultadosPrescricoes') things: QueryList<any>;
+
+  tratamentoForm;
   loading = false;
   submitted = false;
   listaAntibioticos: Antibiotico[] = [];
@@ -23,13 +25,14 @@ export class CadastrarTratamentoComponent implements OnInit {
   contador = 1;
   edicaoTratamento = false;
   trataPaciente;
-  allTrata: FormGroup;
+  allTrata;
   openView = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private title: Title,
+    private prescricao: PrescricaoService,
     private ngxLoader: NgxUiLoaderService,
     private authenticationService: AuthenticationService,
     private antibioticoService: AntibioticoService,
@@ -41,14 +44,14 @@ export class CadastrarTratamentoComponent implements OnInit {
 
     async ngOnInit() {
     this.ngxLoader.start();
-    if (await this.isEdicao() === undefined) {
+    if (await this.isEdicao() === false) {
       this.title.setTitle('Cadastro Tratamento | GESCO ')
     }
     else {
       this.title.setTitle('Editar Tratamento | GESCO')
     }
 
-    if (await this.isEdicao()) {
+    if (await this.isEdicao() !== false) {
       this.edicaoTratamento = true;
       this.tratamento.getTratamento(this.trataPaciente.registro).toPromise()
         .then( data => {
@@ -67,12 +70,11 @@ export class CadastrarTratamentoComponent implements OnInit {
       this.openView = true;
     }
     // this.antibioticos.removeAt(0);
-    // this.consultaTodosAntibioticos();
     this.ngxLoader.stop();
   }
   get f() { return this.tratamentoForm.controls; }
 
-  onSubmit(tratamentoForm: NgForm) {
+  async onSubmit(tratamentoForm: NgForm) {
     this.ngxLoader.start();
     // this.antibioticos.removeAt(0);
 
@@ -88,15 +90,15 @@ export class CadastrarTratamentoComponent implements OnInit {
       return;
     }
 
-    this.isEdicao() ? this.updateTratamento(tratamentoForm) : this.addTratamento(tratamentoForm);
+    await this.isEdicao() ? this.updateTratamento(tratamentoForm) : this.addTratamento(tratamentoForm);
     this.ngxLoader.stop();
   }
 
   updateTratamento(tratamentoForm: NgForm) {
 
-    this.tratamento.updateTratamento(this.trataPaciente.id, tratamentoForm)
+    this.tratamento.updateTratamento(this.trataPaciente.idTratamento, tratamentoForm)
       .subscribe(res => {
-        this.router.navigate(['tratamento/consultar']);
+        this.router.navigate(['paciente/consultar']);
       }, (err) => {
         console.log(err);
       });
@@ -104,15 +106,15 @@ export class CadastrarTratamentoComponent implements OnInit {
   addTratamento(tratamentoForm: NgForm) {
     this.tratamento.insertTratamento(tratamentoForm)
       .subscribe(res => {
-        this.router.navigate(['tratamento/consultar']);
+        this.router.navigate(['paciente/consultar']);
       }, (err) => {
         console.log(err);
       });
   }
 
-  consultaTodosAntibioticos() {
-
-    this.antibioticoService.getAllAntibioticos().toPromise().then(data => { if (data) { this.listaAntibioticos = data; } });
+  deletePrescricao(id) {
+    this.prescricao.deletePrescricao(id)
+    .subscribe();
   }
 
   openPaciente() {
@@ -128,24 +130,29 @@ export class CadastrarTratamentoComponent implements OnInit {
 
   criaFormEdicao(tratamento) {
     tratamento.forEach(element => {
+      let teste;
+      Array(element.prescricoes).forEach(res =>teste = res)
       this.allTrata = this.formBuilder.group({
+        id: [element.id],
         diagnostico: [element.descDiagnostico, Validators.required],
         paciente: [element.nomePaciente, Validators.required],
         pacienteId: [element.registroPaciente, Validators.required],
+        prescricoes:[teste , Validators.required],
+        idTratamento: [element.idTratamento],
         funcionario: { idFuncionario: element.loginFucnionario }
-      });
+      }
+      );
     });
-
     return this.allTrata
   }
 
   criaFormVazio(paciente) {
-    console.log(this.authenticationService.currentUserValue.funcionario)
+    this.edicaoTratamento = false;
     return this.formBuilder.group({
-      diagnostico: ['', Validators.required],
-      paciente: [paciente.nome, Validators.required],
-      pacienteId: [paciente.registro, Validators.required],
-      funcionario: { idFuncionario: this.authenticationService.currentUserValue.funcionario.login },
+      descDiagnostico: ['', Validators.required],
+      registroPaciente: [paciente.registro, Validators.required],
+      hospital: this.authenticationService.currentUserValue.funcionario.hospial.nome,
+      loginFucnionario: this.authenticationService.currentUserValue.funcionario.login
     });
   }
 
@@ -245,5 +252,11 @@ export class CadastrarTratamentoComponent implements OnInit {
 
   }
 
-
+  redirecionaPrescricao(){
+    if(this.tratamentoForm.value.idTratamento.length !== 0){
+      this.router.navigate(['/prescricao/cadastrar'], {state: {prescricaoId: this.tratamentoForm.value.idTratamento}})
+    } else {
+      this.router.navigate(['/prescricao/cadastrar'], {state: {prescricaoId: 1}})
+    }
+  }
 }

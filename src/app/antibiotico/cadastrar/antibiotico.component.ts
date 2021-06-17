@@ -71,7 +71,7 @@ export class CadastrarAntibioticoComponent implements OnInit {
             nomeComercial: [antibiotico.nome, Validators.required],
             dataValidade: [antibiotico.dataValidade, Validators.required],
             tipoAplicacao: [antibiotico.tipoAplicacao, Validators.required],
-            funcionario: { id: antibiotico.idFuncionario }
+            funcionario: { id: this.authenticationService.currentUserValue.funcionario.id }
         }
         );
     }

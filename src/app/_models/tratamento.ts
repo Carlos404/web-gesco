@@ -10,6 +10,7 @@ export class Tratamento {
   antibioticosId?: any;
   pacienteId?: string;
   nome?: any;
+  nomePaciente: any;
   statusTratamento?: any;
   jsonTratamento?: string;
   medico?: string;

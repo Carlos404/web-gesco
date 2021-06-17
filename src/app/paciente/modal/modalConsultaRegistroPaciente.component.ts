@@ -18,7 +18,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       this.paciente = JSON.parse(this.jsonPaciente);
     }
     redirecionaTelaEdicaoTratamento(){
-      console.log(this.paciente)
       this.router.navigate(['/tratamento/cadastrar'], {state: {paciente: this.paciente}})
     }
 

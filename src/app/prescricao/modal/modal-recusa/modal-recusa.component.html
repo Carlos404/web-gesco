@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title">Motivo de recusa</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="prescricaoRecusaForm">
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <label class="font-weight-bold" for="recusa">Descreva o motivo da recusa</label>
+        <textarea class="form-control filter" type="text" formControlName="recusa" placeholder="Não há CEFALOTINA em estoque"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="!prescricaoRecusaForm.value.recusa" routerLink="/paciente/consultar"
+    class="btn btn-primary" (click)="activeModal.close('Close click'); redirecionaTelaEdicao()">Recusar</button>
+</div>

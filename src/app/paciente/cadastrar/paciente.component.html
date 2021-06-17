@@ -40,8 +40,8 @@
           <select formControlName="sexo" name="sexo" class="form-control inputs"
           [ngClass]="{ 'is-invalid': submitted && f.sexo.errors }">
           <option value="" disabled>Selecione</option>
-          <option value="false">Feminino</option>
-          <option value="true">Masculino</option>
+          <option value="true">Feminino</option>
+          <option value="false">Masculino</option>
         </select>
         <div *ngIf="submitted && f.sexo.errors" class="invalid-feedback">
           <div *ngIf="f.sexo.errors.required">Sexo é obrigatório</div>

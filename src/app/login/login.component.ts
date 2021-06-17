@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         () => {
-          // this.appComponent.colocaAcessosMenu();
+          this.appComponent.colocaAcessosMenu();
           this.router.navigate([this.returnUrl]);
         },
         error => {

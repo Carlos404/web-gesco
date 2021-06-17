@@ -7,6 +7,6 @@
     nome?: string;
     cargo?: string;
     token?: string;
-    hospital?: number;
+    hospital: number;
     conselho?: number;
 }

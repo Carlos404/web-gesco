@@ -29,8 +29,20 @@
 
 .divsor {
     border: solid;
-    width: 80%;
     height: auto;
+    width: 80%;
+    padding: 3%;
+    border-width: 1px;
+    border-color: #dcdde1;
+    border-radius: 5px;
+    margin-top: 50px;
+    background: #fff;
+}
+
+.divsor-presc {
+    border: solid;
+    height: auto;
+    width: 103%;
     padding: 3%;
     border-width: 1px;
     border-color: #dcdde1;
@@ -61,10 +73,18 @@
     min-width: 300px;
 }
 
+.filter {
+    max-width: 200px;
+}
+
 .formInputs {
     justify-content: space-around !important;
     margin-right: 130px;
     align-items: flex-end;
+}
+
+.button-ap-re{
+    display: flex;
 }
 
 .inputAplicacao {

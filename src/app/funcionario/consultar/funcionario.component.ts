@@ -14,7 +14,9 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 @Component({ selector: 'app-funcionario', templateUrl: './funcionario.component.html' })
 export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
 
-  order: string = 'nome';
+  userFilter: any = { nome: '' };
+  order: string = '';
+  selected: string;
   reverse: boolean = false;
 
   @ViewChildren('resultadosFuncionario') things: QueryList<any>;
@@ -27,6 +29,7 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   funcionarioForm: FormGroup;
   submitted = false;
   verify: boolean = false;
+  public orderSelect;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -74,10 +77,6 @@ export class ConsultarFuncionarioComponent implements OnInit, AfterViewInit {
   }
 
   setOrder(order) {
-    if (this.order === order) {
-      this.reverse = !this.reverse;
-    }
-
     this.order = order;
   }
 

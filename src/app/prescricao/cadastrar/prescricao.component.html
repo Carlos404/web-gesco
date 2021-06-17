@@ -1,1 +1,49 @@
-<p>prescricao works!</p>
+<div class="container">
+  <form *ngIf="prescricaoForm" [formGroup]="prescricaoForm" (ngSubmit)="onSubmit(prescricaoForm.value)">
+    <div class="divsor container">
+      <div class="divsorTexto">Prescricao</div>
+      <div class="form-row">
+        <div class="col-md-3">
+          <label for="nome">Descrição Prescrição</label>
+          <input type="text" formControlName="descPrescricao" class="form-control" placeholder="Paciente alergico a dipirona">
+        </div>
+
+        <div class="col-md-3">
+          <label for="nome">Dias de tratamento</label>
+          <input type="number" step="1.0" formControlName="diasTratamento" class="form-control" placeholder="5 dias"/>
+        </div>
+
+        <div class="col-md-3">
+          <label for="nome">Dose diária - mg</label>
+          <input type="number" step="0.10" formControlName="dosagemDiaria" class="form-control" placeholder="10mg"/>
+        </div>
+
+        <div class="col-md-3">
+          <label for="nome">Antibiótico</label>
+          <select class="form-control" formControlName="idAntibiotico" name="idAntibiotico">
+            <option value="" disabled selected>Antibiótico</option>
+            <option *ngFor="let lista of listaAntibioticos" value={{lista.id}}>{{lista.nome}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label for="nome">Periodicidade</label>
+          <select class="form-control" formControlName="periodiociadade" name="periodiociadade">
+            <option value="" disabled selected>Periodicidade</option>
+            <option value="2">2/2</option>
+            <option value="4">4/4</option>
+            <option value="6">6/6</option>
+            <option value="8">8/8</option>
+            <option value="12">12/12</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" (ngSubmit)="onSubmit(prescricaoForm.value)">Salvar</button>
+        <a routerLink="/paciente/consultar" class="btn btn-link">Cancelar</a>
+      </div>
+    </div>
+  </form>
+</div>

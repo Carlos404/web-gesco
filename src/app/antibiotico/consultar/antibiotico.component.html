@@ -4,7 +4,7 @@
   </div>
 
   <div class="row d-flex justify-content-end mt-5">
-    <select name="select" [(ngModel)]="orderSelect" (ngModelChange)="setOrder($event)">
+    <select class="form-control filter" name="select" [(ngModel)]="orderSelect" (ngModelChange)="setOrder($event)">
       <option value="" [(value)]="selected" disabled>Filtrar</option>
       <option value="lote">Lote</option>
       <option value="nome">Nome</option>

@@ -1,30 +1,103 @@
 <div class="container">
-  <form *ngIf="tratamentoForm || openView" [formGroup]="tratamentoForm">
-    <div class="divsor container">
+  <form *ngIf="tratamentoForm || openView" [formGroup]="tratamentoForm" (ngSubmit)="onSubmit(tratamentoForm.value)">
+    <div class="divsor-presc container">
       <div class="divsorTexto">Tratamento</div>
       <div class="form-row">
 
-        <div class="col-md-3">
-          <label for="nome">Paciente ID</label>
-          <input type="text" formControlName="pacienteId" class="form-control">
-        </div>
+        <ng-template [ngIf]="edicaoTratamento" [ngIfElse]="loading">
+          <div class="col-md-3">
+            <label for="nome">Paciente ID</label>
+            <input type="text" formControlName="pacienteId" class="form-control" disabled>
+          </div>
+  
+          <div class="col-md-3">
+            <label for="nome">Paciente</label>
+            <input type="text" formControlName="paciente" class="form-control" disabled>
+          </div>
+  
+          <div class="col-md-3">
+            <label for="nome">Diagnóstico</label>
+            <input type="text" formControlName="diagnostico" class="form-control" disabled>
+          </div>
+          <div class="col-md-3">
+            <label for="nome"> </label>
+            <button class="btn btn-info form-control" routerLink="/prescricao/cadastrar"  (click)="redirecionaPrescricao()">Inserir prescrição</button>
+          </div>
 
-        <div class="col-md-3">
-          <label for="nome">Paciente</label>
-          <input type="text" formControlName="paciente" class="form-control">
-        </div>
+          <div *ngIf="tratamentoForm.value.prescricoes">
+              <div class="row" *ngIf="tratamentoForm.value.prescricoes">
+                  <div class="card mt-4">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>Prescrição
+                            </th>
+                            <th>Antibiotico
+                            </th>
+                            <th>Início tratamento
+                            </th>
+                            <th>Fim tratamento
+                            </th>
+                            <th>Dose diária
+                            </th>
+                            <th>Periodicidade
+                            </th>
+                            <th>Status
+                            </th>
+                            <th>Ação
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="tbody-resultados" *ngIf="tratamentoForm.value.prescricoes">
+                          <tr #resultadosPrescricoes #loading
+                          *ngFor="let pres of tratamentoForm.value.prescricoes" class="cursorPointer resultado">
+                            <td style=" white-space: nowrap;
+                            overflow: hidden;
+                            max-width: 227px;">{{pres.descPrescricao}}</td>
+                            <td>{{pres.nomeAntibiotico}}</td>
+                            <td>{{pres.inicioTratamento | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{pres.fimTratamento | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{pres.dosagemDiaria}}mg</td>
+                            <td>{{pres.periodiociadade}} horas</td>
+                            <td *ngIf="pres.statusTratamento === 'RECUSADO'">
+                              <button class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="{{pres.descStatusTratamento}}" disabled>Recusado</button>
+                            </td> 
+                            <td *ngIf="pres.statusTratamento === 'APROVADO'">
+                              <button class="btn btn-success" disabled>Aprovado</button>
+                            </td> 
+                            <td *ngIf="pres.statusTratamento === 'PENDENTE'">
+                              <button class="btn btn-secondary" disabled>Pendente</button>
+                            </td> 
+                            <td *ngIf="pres.statusTratamento === 'APROVADO'"><button class="btn btn-danger" (click)="deletePrescricao(pres.idPrescricao)" routerLink="/paciente/consultar" disabled>Excluir</button></td>
+                            <td *ngIf="pres.statusTratamento != 'APROVADO'"><button class="btn btn-danger" (click)="deletePrescricao(pres.idPrescricao)" routerLink="/paciente/consultar">Excluir</button></td>
 
-        <div class="col-md-3">
-          <label for="nome">Diagnóstico</label>
-          <input type="text" formControlName="diagnostico" class="form-control"/>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+          </div>
+         </ng-template>
+
+         <ng-template #loading>
+          <div class="col-md-3">
+            <label for="nome">Paciente ID</label>
+            <input type="text" formControlName="registroPaciente" class="form-control">
+          </div>
+  
+          <div class="col-md-3">
+            <label for="nome">Diagnóstico</label>
+            <input type="text" formControlName="descDiagnostico" class="form-control" />
+          </div>
+         </ng-template>
+
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="!tratamentoForm.value.prescricoes">
         <button class="btn btn-primary" (ngSubmit)="onSubmit(tratamentoForm.value)">Salvar</button>
-        <a routerLink="/tratamento/consultar" class="btn btn-link">Cancelar</a>
-      </div>
-
+        <a routerLink="/paciente/consultar" class="btn btn-link">Cancelar</a>
       </div>
     </div>
   </form>
 </div>
+

@@ -1,1 +1,70 @@
-<p>prescricao works!</p>
+<div class="container">
+  <div class="row d-flex justify-content-end mt-5">
+    <select class="form-control filter" name="select" [(ngModel)]="orderSelect" (ngModelChange)="setOrder($event)">
+      <option value="" [(value)]="selected" disabled>Filtrar</option>
+      <option value="nomeAntibiotico">Nome</option>
+      <option value="inicioTratamento">Início tratamento</option>
+      <option value="fimTratamento">Fim tratamento</option>
+      <option value="statusTratamento" selected>Status</option>
+    </select>
+  </div>
+  <div class="row">
+    <form [formGroup]="prescricaoForm" class="w-100">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2 class="mt-3">Consultar Prescrição</h2>
+          <div class="input-group mb-3">
+            <input [(ngModel)]="userFilter.nomeAntibiotico" type="text" class="form-control" formControlName="nome" placeholder="Nome do antibiótico"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+          </div>
+        </div>
+        <div class="card-body" id="resultado">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Antibiótico
+                </th>
+                <th>Descrição
+                </th>
+                <th>Inicio tratamento
+                </th>
+                <th>Fim tratamento
+                </th>
+                <th>Dosagem diária
+                </th>
+                <th>Periodicidade
+                </th>
+                <th>Status
+                </th>
+                <th>Ação
+                </th>
+              </tr>
+            </thead>
+            <tbody class="tbody-resultados">
+              <tr #resultadosPrescricao *ngFor="let prescricao of prescricoes | filterBy: userFilter | orderBy: order: reverse; let i = index"
+              attr.data-codigo-prescricao="{{prescricao.idPrescricao}}"
+              >
+                <td>{{prescricao.nomeAntibiotico}}</td>
+                <td>{{prescricao.descPrescricao}}</td>
+                <td>{{prescricao.inicioTratamento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{prescricao.fimTratamento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{prescricao.dosagemDiaria}}mg</td>
+                <td>{{prescricao.periodiociadade}} horas</td>
+                <td>{{prescricao.statusTratamento}}</td>
+                <td class="button-ap-re" *ngIf="prescricao.statusTratamento === 'PENDENTE'">
+                  <button class="btn btn-primary" (click)="updatePrescricao(prescricao.idPrescricao,  1)"
+                    routerLink="/paciente/consultar">Aprovar</button>
+                  <button class="btn btn-danger cursorPointer resultado" attr.data-json-prescricao="{{prescricao.idPrescricao}}">Recusar</button>
+                </td>
+                <td class="button-ap-re" *ngIf="prescricao.statusTratamento != 'PENDENTE'">
+                  <button class="btn btn-primary" routerLink="/paciente/consultar" disabled>Aprovar</button>
+                  <button class="btn btn-danger" routerLink="/prescricao/consultar" disabled>Recusar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

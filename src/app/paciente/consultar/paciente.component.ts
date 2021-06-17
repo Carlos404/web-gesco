@@ -12,7 +12,9 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 @Component({ selector: 'app-paciente', templateUrl: './paciente.component.html' })
 export class ConsultarPacienteComponent implements OnInit {
 
-  order: string = 'registry';
+  userFilter: any = { nome: '' };
+  order: string = '';
+  selected: string;
   reverse: boolean = false;
   verify: boolean = false;
 
@@ -25,7 +27,7 @@ export class ConsultarPacienteComponent implements OnInit {
   submitted = false;
   jsonPaciente;
   origemTratamento = false;
-  
+  public orderSelect;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,

@@ -53,7 +53,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
     }
 
     updateFuncionario(funcionarioForm: NgForm) {
-      this.funcionarioService.updateFuncionario(history.state.funcionario.idFuncionario, funcionarioForm)
+      this.funcionarioService.updateFuncionario(history.state.funcionario.login, funcionarioForm)
           .subscribe(res => {
               this.router.navigate(['funcionario/consultar']);
           }, (err) => {
@@ -73,13 +73,11 @@ export class CadastrarFuncionarioComponent implements OnInit {
     criaFormEdicao(funcionario: Funcionario){
       return this.formBuilder.group({
           nome: [funcionario.nome, Validators.required],
-          dtNascimento: [funcionario.dtNascimento, Validators.required],
-          sexo: [funcionario.sexo, Validators.required],
           tipoFuncionario: [funcionario.tipoFuncionario, Validators.required],
           login: [funcionario.login, Validators.required],
           senha: [funcionario.senha, Validators.required],
-          crmOuCrf: [funcionario.crmOuCrf, Validators.required],
-          hospital: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}, Validators.required]
+          conselho: [this.authenticationService.currentUserValue.funcionario.conselho, Validators.required],
+          hospial: [{id: this.authenticationService.currentUserValue.funcionario.hospial.id}, Validators.required]
       });
     }
 

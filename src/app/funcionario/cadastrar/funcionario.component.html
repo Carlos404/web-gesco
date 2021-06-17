@@ -21,9 +21,9 @@
             <option *ngIf="acessoDev" value="0">Desenvolvedor</option>
             <option value="0">Médico</option>
             <option value="1">Farmacêutico</option>
-            <option value="2">Internação</option>
-            <option value="3">Farmácia</option>
-            <option value="4">Administrador</option>
+            <option value="2">Administração</option>
+            <!-- <option value="3">Farmácia</option>
+            <option value="4">Administrador</option> -->
           </select>
           <div *ngIf="submitted && f.tipoFuncionario.errors" class="invalid-feedback">
             <div *ngIf="f.tipoFuncionario.errors.required">Tipo funcionário é obrigatório</div>
